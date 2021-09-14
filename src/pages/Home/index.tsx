@@ -13,15 +13,15 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function loadNews(){
-      // const response = axios.('https://www.blogdoneylima.com.br/wp-json/');
-      // console.log(response);
-      fetch('https://www.blogdoneylima.com.br/wp-json/', {
-        method: 'GET'
-      })
-      .then(response => response.json())
-      .then(response => {
-        console.log(response)
-      })
+      const response = axios.get('https://www.blogdoneylima.com.br/wp-json/wp/v2/posts');
+      console.log(response);
+      // fetch('https://www.blogdoneylima.com.br/wp-json/wp/v2/posts', {
+      //   method: 'GET'
+      // })
+      // .then(response => response.json())
+      // .then(response => {
+      //   console.log(response)
+      // })
     }
     loadNews();
   }, []);
