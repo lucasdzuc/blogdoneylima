@@ -54,12 +54,6 @@ interface News {
   date?: string;
 }
 
-function wait(timeout: number) {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeout);
-  });
-}
-
 const Home: React.FC = () => {
 
   const modalizeRef = useRef<Modalize>(null);
@@ -114,6 +108,12 @@ const Home: React.FC = () => {
   useEffect(() => {
     loadNews();
   }, []);
+
+  function wait(timeout: number) {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
