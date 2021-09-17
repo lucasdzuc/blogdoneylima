@@ -89,6 +89,20 @@ const DrawerRoutes = () => {
           drawerIcon: ({ color, size }) => (
             <Feather name="mail" size={size} color={color} />
           ),
+          headerShown: true,
+          title: 'Contanto',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            // fontFamily: 'gilroymedium',
+            // fontSize: 17,
+            color: '#Ec7C27',
+          },
+          headerStyle: {
+            backgroundColor: '#FFF',
+            elevation: 0,
+            borderWidth: 0,
+            shadowColor: 'transparent',
+          },
         }}
       />
       <Drawer.Screen
@@ -99,6 +113,20 @@ const DrawerRoutes = () => {
           drawerIcon: ({ color, size }) => (
             <Feather name="settings" size={size} color={color} />
           ),
+          headerShown: true,
+          title: 'Configurações',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            // fontFamily: 'gilroymedium',
+            // fontSize: 17,
+            color: '#Ec7C27',
+          },
+          headerStyle: {
+            backgroundColor: '#FFF',
+            elevation: 0,
+            borderWidth: 0,
+            shadowColor: 'transparent',
+          },
         }}
       />
       {/* <Drawer.Screen

@@ -1,5 +1,4 @@
 import { format, parseISO } from 'date-fns'
-import { zonedTimeToUtc } from 'date-fns-tz';
 
 export default function formatDate(date: string){
 

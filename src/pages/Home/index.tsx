@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, Text, RefreshControl } from 'react-native';
+import { View, Text, RefreshControl, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 // import axios from 'axios';
@@ -12,7 +12,7 @@ import formatDate from '../../utils/formatDate';
 
 import {
   Container,
-  ProductList,
+  NewsList,
   HeaderList,
   ButtonRedirectSearch,
   TextButtonRedirectSearch,
@@ -54,6 +54,10 @@ interface News {
   date?: string;
 }
 
+interface Types {
+  formatDate(): void
+}
+
 const Home: React.FC = () => {
 
   const modalizeRef = useRef<Modalize>(null);
@@ -62,6 +66,9 @@ const Home: React.FC = () => {
 
   const [news, setNews] = useState<News[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
 
   // function getImage(value: string){
   //   // let valor = value;
@@ -86,6 +93,14 @@ const Home: React.FC = () => {
     // console.log(response);
     // const data = response.json();
     // setNews(response);
+    if (loading) {
+      return;
+    }
+    if (total > 0 && news.length   === total) {
+      return;
+    }
+
+    setLoading(true);
 
     await fetch('https://blogdoneylima.com.br/wp-json/wp/v2/posts', {
       method: 'GET',
@@ -93,21 +108,26 @@ const Home: React.FC = () => {
       .then(response => response.json())
       .then(response => {
         // console.log(response);
-        const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>")
-        setNews(
-          data.map((item: News) => ({
-            ...item,
-            // image_url: getImage(item.content?.rendered)
-          }))
-        );
+        const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+        // setNews([...news, ...data]);
+        setNews(data);
+        // setTotal(1);
+        // setPage(page + 1);
+        setLoading(false);
+        // setNews(
+        //   data.map((item: News) => ({
+        //     ...item,
+        //     // image_url: getImage(item.content?.rendered)
+        //   }))
+        // );
       }).catch((error) => {
         console.log(error);
       });
   }
-
+  
   useEffect(() => {
     loadNews();
-  }, []);
+  }, [news]);
 
   function wait(timeout: number) {
     return new Promise(resolve => {
@@ -122,6 +142,15 @@ const Home: React.FC = () => {
 
     wait(1000).then(() => setRefreshing(false));
   }, [refreshing]);
+
+  function FooterList({ load }: any){
+    if (!load) return null;
+    return (
+      <View style={{ padding: 10 }}>
+        <ActivityIndicator size={24} color="#999591" />
+      </View>
+    )
+  }
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -144,14 +173,16 @@ const Home: React.FC = () => {
         ))}
       </ContentCardNews>  */}
 
-      <ProductList
+      <NewsList
         data={news}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         keyExtractor={(item: News) => String(item.id)}
+        onEndReached={loadNews}
+        onEndReachedThreshold={0.1}
         contentContainerStyle={{
           // paddingVertical: 8,
           paddingHorizontal: 16,
         }}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         ListHeaderComponent={
           <HeaderList>
             <ButtonRedirectSearch onPress={navigateToSearch} activeOpacity={0.9}>
@@ -167,12 +198,13 @@ const Home: React.FC = () => {
         ListHeaderComponentStyle={{
           paddingVertical: 48,
         }}
+        ListFooterComponent={ <FooterList load={loading} /> }
         renderItem={({ item }: any) => (
           <CardNews>
 
-            <ImageNews source={{ uri: item?.image_url }} />
+            <ImageNews source={{ uri: item?.image }} />
 
-            <DateNews>{formatDate(item.date)}</DateNews>
+            <DateNews>{formatDate(item?.date)}</DateNews>
 
             <TitleNews>{item.title?.rendered}</TitleNews>
 

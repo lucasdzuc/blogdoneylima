@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, ScrollView, Image, Alert, TextInputProps } from 'react-native';
-import axios from 'axios';
+import { Feather } from '@expo/vector-icons';
+// import axios from 'axios';
 
 // IMPORT API SERVER
-import api from '../../services/api';
+// import api from '../../services/api';
 
 // import useDebouncePromise from '../../utils/useDebouncePromise';
 import useDebounce from '../../utils/useDebounce';
@@ -22,17 +23,14 @@ import {
   ButtonGoBack,
   TextInput,
   ButtonSearch,
-  OrgContainer,
-  Org,
-  OrgInternContainer,
-  OrgAvatarContainer,
-  OrgAvatarImage,
-  OrgContent,
-  OrgTitle,
-  OrgDescription,
-  AreaButtons,
-  ButtonSaveFavorityOrg,
-  TextButtonSaveFavorityOrg,
+  ContentCardNews,
+  CardNews,
+  ImageNews,
+  DateNews,
+  TitleNews,
+  ContentButtonLeadMore,
+  ButtonLeadMoreNews,
+  TextButtonLeadMoreNews,
   MessageOrgNameNotExist,
   TextMessageOrgNameNotExist,
   InfoMessageScreen,
@@ -65,21 +63,28 @@ const Search: React.FC = () => {
 
   // const searchRef = useRef<any>(null);
 
-  const [news, setsetNews] = useState<News[]>([]);
+  const [news, setNews] = useState<News[]>([]);
   const [searchValue, setSearchValue] = useState('');
   // const [isFavorite, setIsFavorite] = useState(false);
-
-  // const debouncedPromise = useDebouncePromise(axios, 300);
   const { debounce } = useDebounce();
 
   async function loadNews(news: string): Promise<void> {
     try {
-      if(!searchValue){
+      if (!searchValue) {
         return;
       }
-      
+
+      await fetch(`https://www.blogdoneylima.com.br/wp-json/wp/v2/posts`, {
+        method: "GET"
+      })
+      .then(response => response.json())
+      .then(response => {
+        const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+        setNews(data);
+      })
+
     } catch (error) {
-      setsetNews([]);
+      setNews([]);
       console.log(error);
       // eslint-disable-next-line no-console
     }
@@ -94,8 +99,12 @@ const Search: React.FC = () => {
 
   const handleClearInput = () => {
     setSearchValue('');
-    setsetNews([]);
-  }
+    setNews([]);
+  };
+
+  const navigateToDetailNews = useCallback((newsId: number) => {
+    navigation.navigate('DetailNews', { newsId });
+  }, []);
 
   return (
     <Container>
@@ -109,32 +118,34 @@ const Search: React.FC = () => {
         />
       </ContentInputSearch>
 
-      <ScrollView 
-        style={{ flex: 1, backgroundColor: '#FFF' }} 
+      <ScrollView
+        style={{ flex: 1, backgroundColor: '#FFF' }}
         showsVerticalScrollIndicator={true}
+        contentContainerStyle={{
+          paddingVertical: 16,
+          // paddingHorizontal: 16,
+        }}
       >
-        <OrgContainer>
+        <ContentCardNews>
           {news.length > 0 ? (
             news.map(item => (
 
-              <Org key={item.id}>
-                <OrgInternContainer>
-                  <OrgAvatarContainer>
-                    <OrgAvatarImage source={{ uri: item.image }}/>
-                  </OrgAvatarContainer>
-                  <OrgContent>
-                    <OrgTitle>{item.title?.rendered}</OrgTitle>
-                    {/* <OrgDescription>{item.excerpt?.rendered}</OrgDescription> */}
-                  </OrgContent>
-                </OrgInternContainer>
-                
-                <AreaButtons>
-                  {/* <ButtonSaveFavorityOrg onPress={() => toggleFavorite(item)} testID={`item-${item}`} isFavorite={isFavorite} activeOpacity={0.6}> */}
-                    {/* {isFavorite ? <SalvoBrancoIcon width={20} height={20} /> : <SalvoAzulIcon width={20} height={20} /> } */}
-                    {/* <TextButtonSaveFavorityOrg isFavorite={isFavorite}>{isFavorite ? 'Salvo' : 'Salvar'}</TextButtonSaveFavorityOrg> */}
-                  {/* </ButtonSaveFavorityOrg> */}
-                </AreaButtons>
-              </Org>
+              <CardNews>
+
+                <ImageNews source={{ uri: item?.image }} />
+
+                {/* <DateNews>{formatDate(item?.date)}</DateNews> */}
+
+                <TitleNews>{item.title?.rendered}</TitleNews>
+
+                <ContentButtonLeadMore>
+                  <ButtonLeadMoreNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={0.6}>
+                    <Feather name="arrow-right" size={20} color="#Ec7C27" />
+                    <TextButtonLeadMoreNews>Ver mais</TextButtonLeadMoreNews>
+                  </ButtonLeadMoreNews>
+                </ContentButtonLeadMore>
+
+              </CardNews>
 
             ))
           ) : (
@@ -149,13 +160,13 @@ const Search: React.FC = () => {
                 <InfoMessageScreen>
                   {/* <ImageInfoSearch width={200} height={200} /> */}
                   <TextInfoMessageScreen>
-                    Pesquise por notícias no{'\n'}<TextPlus>Blog do Ney Lima</TextPlus>!
+                    Pesquise por notícias no{'\n'}<TextPlus>Blog do Ney Lima</TextPlus>
                   </TextInfoMessageScreen>
                 </InfoMessageScreen>
               )}
             </>
           )}
-        </OrgContainer>
+        </ContentCardNews>
       </ScrollView>
 
     </Container>

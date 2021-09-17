@@ -6,7 +6,7 @@ export const Container = styled.View`
   background: #FFF;
 `;
 
-export const ProductList = styled(FlatList)``;
+export const NewsList = styled(FlatList)``;
 
 export const HeaderList = styled.View`
   /* flex: 1; */
