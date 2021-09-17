@@ -4,6 +4,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 
+import formatDate from '../../utils/formatDate';
+
 import { 
   Container,
   CardNews,
@@ -83,7 +85,7 @@ const DetailNews: React.FC = () => {
 
           <ImageNews source={{ uri: item?.image }} height={width / 2} />
 
-          <DateNews>{item.date}</DateNews>
+          <DateNews>{formatDate(item.date)}</DateNews>
 
           <TitleNews>{item.title?.rendered}</TitleNews>
 

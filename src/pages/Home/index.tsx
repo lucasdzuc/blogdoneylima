@@ -8,6 +8,8 @@ import { Modalize } from 'react-native-modalize';
 
 // import api from '../../services/api';
 
+import formatDate from '../../utils/formatDate';
+
 import {
   Container,
   ProductList,
@@ -22,7 +24,13 @@ import {
   TitleNews,
   ContentButtonLeadMore,
   ButtonLeadMoreNews,
-  TextButtonLeadMoreNews
+  TextButtonLeadMoreNews,
+  ContainerModalize,
+  HeaderModalize,
+  TitleHeaderModalize,
+  ContainerButtonCloseModalModilize,
+  ButtonCloseModalModalize,
+  TextButtonCloseModilize,
 } from './styles';
 
 interface Title {
@@ -86,7 +94,7 @@ const Home: React.FC = () => {
     // setNews(response);
 
     await fetch('https://blogdoneylima.com.br/wp-json/wp/v2/posts', {
-      method: 'GET'
+      method: 'GET',
     })
       .then(response => response.json())
       .then(response => {
@@ -98,6 +106,8 @@ const Home: React.FC = () => {
             // image_url: getImage(item.content?.rendered)
           }))
         );
+      }).catch((error) => {
+        console.log(error);
       });
   }
 
@@ -116,6 +126,10 @@ const Home: React.FC = () => {
   const onOpen = () => {
     modalizeRef.current?.open();
   };
+  const closeModal = () => {
+    // setIdPost();
+    modalizeRef.current?.close();
+  }
 
   return (
     <Container>
@@ -141,7 +155,7 @@ const Home: React.FC = () => {
         ListHeaderComponent={
           <HeaderList>
             <ButtonRedirectSearch onPress={navigateToSearch} activeOpacity={0.9}>
-              <TextButtonRedirectSearch>Pesquisar...</TextButtonRedirectSearch>
+              <TextButtonRedirectSearch>Pesquisar notícia...</TextButtonRedirectSearch>
               <Feather name="search" size={24} color="#858585" />
             </ButtonRedirectSearch>
 
@@ -158,7 +172,7 @@ const Home: React.FC = () => {
 
             <ImageNews source={{ uri: item?.image_url }} />
 
-            <DateNews>{item.date}</DateNews>
+            <DateNews>{formatDate(item.date)}</DateNews>
 
             <TitleNews>{item.title?.rendered}</TitleNews>
 
@@ -176,8 +190,26 @@ const Home: React.FC = () => {
       <Portal>
         <Modalize
           ref={modalizeRef}
+          // style={{ flex: 1 }}
+          snapPoint={320}
+          modalHeight={320}
+          handlePosition="inside"
+          HeaderComponent={
+            <HeaderModalize>
+              <TitleHeaderModalize>FILTRAR</TitleHeaderModalize>
+            </HeaderModalize>
+          }
+          FooterComponent={
+            <ContainerButtonCloseModalModilize>
+              <ButtonCloseModalModalize onPress={closeModal} activeOpacity={0.7} >
+                <TextButtonCloseModilize>Cancelar</TextButtonCloseModilize>
+              </ButtonCloseModalModalize>
+            </ContainerButtonCloseModalModilize>
+          }
         >
-
+          <ContainerModalize>
+            <Text>Filtre por data</Text>
+          </ContainerModalize>
         </Modalize>
       </Portal>
 
