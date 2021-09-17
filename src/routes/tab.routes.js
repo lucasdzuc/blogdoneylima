@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Feather } from '@expo/vector-icons';
 
 const Drawer = createDrawerNavigator();
 
@@ -15,62 +16,98 @@ import Configuration from '../pages/Configuration';
 
 const DrawerRoutes = () => {
 
+  function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 50, height: 50 }}
+        // source={require('@expo/snack-static/react-native-logo.png')}
+      />
+    );
+  }
+
   return (
     <Drawer.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        showLabel: false,
-        activeTintColor: '#000',
-        inactiveTintColor: 'rgba(0, 0, 0, 0.3)',
-        labelStyle: {
+        showLabel: true,
+        drawerActiveTintColor: '#Ec7C27',
+        drawerInactiveTintColor: '#858585',
+        drawerActiveBackgroundColor: '#F4F4F4',
+        // drawerHideStatusBarOnOpen
+        drawerLabelStyle: {
           // fontFamily: 'gilroymedium',
-          fontSize: 14,
+          fontSize: 17,
           textTransform: 'capitalize',
         },
-        tabStyle: {
-          paddingTop: 6,
-          paddingBottom: 6,
-          // backgroundColor: 'red',
-        },
+        drawerStyle: {
+          backgroundColor: '#FFF',
+          elevation: 0,
+          borderWidth: 0,
+          shadowColor: 'transparent',
+        }
       }}
     >
       <Drawer.Screen
         name="Home"
         component={Home}
         options={{
-          tabBarLabel: 'Inicio',
-          // tabBarIcon: ({ color, size }) => (
-          //   <HomeIcon name="home" color={color} size={24} />
-          // ),
+          drawerLabel: 'Início',
+          drawerIcon: ({ color, size }) => (
+            <Feather name="home" size={size} color={color} />
+          ),
+          // headerTitle: (props => <LogoTitle {...props} />),
+          headerShown: true,
+          title: 'Blog do Ney Lima',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            // fontFamily: 'gilroymedium',
+            // fontSize: 17,
+            color: '#Ec7C27',
+          },
+          headerStyle: {
+            backgroundColor: '#FFF',
+            elevation: 0,
+            borderWidth: 0,
+            shadowColor: 'transparent',
+          },
+          headerRight: () => (
+            <Feather 
+              name="bell" 
+              size={24} 
+              color="#000"
+              style={{ paddingHorizontal: 24 }}
+              // onPress={() => {}}
+            />
+          ),
         }}
       />
       <Drawer.Screen
         name="Contact"
         component={Contact}
         options={{
-          tabBarLabel: 'Contato',
-          // tabBarIcon: ({ color, size }) => (
-          //   <HomeIcon name="home" color={color} size={24} />
-          // ),
+          drawerLabel: 'Contato',
+          drawerIcon: ({ color, size }) => (
+            <Feather name="mail" size={size} color={color} />
+          ),
         }}
       />
       <Drawer.Screen
         name="Configuration"
         component={Configuration}
         options={{
-          tabBarLabel: 'Configurações',
-          // tabBarIcon: ({ color, size }) => (
-          //   <CardapioIcon name="cardapio" color={color} size={24} />
-          // ),
+          drawerLabel: 'Configurações',
+          drawerIcon: ({ color, size }) => (
+            <Feather name="settings" size={size} color={color} />
+          ),
         }}
       />
       {/* <Drawer.Screen
         name="Spot"
         component={Spot}
         options={{
-          tabBarLabel: 'Local',
-          tabBarIcon: ({ color, size }) => (
-            <LocationIcon name="location" color={color} size={24} />
+          drawerLabel: 'Local',
+          drawerIcon: ({ color, size }) => (
+            <Feather name="settings" size={size} color={color} />
           ),
         }}
       /> */}
