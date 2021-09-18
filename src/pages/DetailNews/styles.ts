@@ -38,3 +38,16 @@ export const TextContentNews = styled.Text`
   text-align: justify;
   line-height: 24px;
 `;
+
+export const LoadingData = styled.View`
+  flex: 1;
+  background: #FFF;
+  justify-content: center;
+`;
+
+export const TextLoadingData = styled.Text`
+  font-size: 16px;
+  color: #999591;
+  text-align: center;
+  padding: 8px 0px;
+`;

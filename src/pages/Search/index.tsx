@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, ScrollView, Image, Alert, TextInputProps } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 // import axios from 'axios';
 
@@ -8,6 +9,7 @@ import { Feather } from '@expo/vector-icons';
 
 // import useDebouncePromise from '../../utils/useDebouncePromise';
 import useDebounce from '../../utils/useDebounce';
+import formatDate from '../../utils/formatDate';
 
 // IMPORT COMPONENTS
 import SearchInput from '../../components/SearchInput';
@@ -56,10 +58,12 @@ interface News {
   title?: Title;
   content?: Content;
   excerpt?: Excerpt;
-  date?: string;
+  date?: any;
 }
 
 const Search: React.FC = () => {
+
+  const navigation = useNavigation();
 
   // const searchRef = useRef<any>(null);
 
@@ -67,6 +71,12 @@ const Search: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
   // const [isFavorite, setIsFavorite] = useState(false);
   const { debounce } = useDebounce();
+
+  function getImage(value: any){
+    const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
+    // console.log(match);
+    return match;
+  };
 
   async function loadNews(news: string): Promise<void> {
     try {
@@ -80,8 +90,13 @@ const Search: React.FC = () => {
       .then(response => response.json())
       .then(response => {
         const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
-        setNews(data);
-      })
+        setNews(
+          data.map((item: News) => ({
+            ...item,
+            image: getImage(item.content?.rendered)
+          }))
+        );
+      });
 
     } catch (error) {
       setNews([]);
@@ -132,9 +147,9 @@ const Search: React.FC = () => {
 
               <CardNews>
 
-                <ImageNews source={{ uri: item?.image }} />
+                <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
 
-                {/* <DateNews>{formatDate(item?.date)}</DateNews> */}
+                <DateNews>{formatDate(item?.date)}</DateNews>
 
                 <TitleNews>{item.title?.rendered}</TitleNews>
 

@@ -100,7 +100,7 @@ export const HeaderModalize = styled.View`
 `;
 
 export const TitleHeaderModalize = styled.Text`
-  font-size: 16px;
+  font-size: 15px;
   color: #Ec7C27;
   font-weight: 700;
 `;

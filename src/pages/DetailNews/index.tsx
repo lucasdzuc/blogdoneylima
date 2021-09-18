@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions, ActivityIndicator } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
@@ -13,6 +13,8 @@ import {
   DateNews,
   TitleNews,
   TextContentNews,
+  LoadingData,
+  TextLoadingData,
 } from './styles';
 
 interface Title {
@@ -36,27 +38,41 @@ interface News {
   date?: string;
 }
 
-const DetailNews: React.FC = () => {
+interface Props {
+  formatDate(item: string): void;
+}
+
+const DetailNews: React.FC<Props> = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
   
-  const { newsId } = route.params;
+  const { newsId }: any = route.params;
 
   // console.log(newsId);
 
   const [news, setNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(false);
+
+  function getImage(value: any){
+    const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/s);
+    // console.log(match);
+    return match;
+  };
   
   useEffect(() => {
     async function loadPost(){
 
       setLoading(true);
-      const response = fetch(`https://blogdoneylima.com.br/wp-json/wp/v2/posts/${newsId}`)
+
+      await fetch(`https://blogdoneylima.com.br/wp-json/wp/v2/posts/${newsId}`)
       .then(response => response.json())
       .then(response => {
-        // console.log(response);
-        setNews([response]);
+        // console.log([response]);
+        setNews([response].map((item: News) => ({
+          ...item,
+          image: getImage(item.content?.rendered)
+        })));
         setLoading(false);
       })
       .catch((error) => {
@@ -80,12 +96,29 @@ const DetailNews: React.FC = () => {
       }}
     >
       
-      {news.map((item) => (
+      {loading ? (
+        <LoadingData>
+          <ActivityIndicator size={25} color="#999591" />
+          <TextLoadingData>Caregando...</TextLoadingData>
+        </LoadingData>
+        ) : (
+        news.map((item: News) => (
         <CardNews key={item.id}>
 
-          <ImageNews source={{ uri: item?.image }} height={width / 2} />
+          {/* <ImageNews source={{ uri: item?.image }} width={width - 56} height={width - 56} /> */}
+          
+          <Image 
+            source={{ uri: item.image }}
+            style={{ 
+              width: width - 56,
+              height: width - 56,
+              backgroundColor: "#C8C8C8", 
+              borderRadius: 10,
+            }} 
+            resizeMode="cover"
+          />
 
-          <DateNews>{formatDate(item.date)}</DateNews>
+          <DateNews>{formatDate(item?.date)}</DateNews>
 
           <TitleNews>{item.title?.rendered}</TitleNews>
 
@@ -93,7 +126,8 @@ const DetailNews: React.FC = () => {
 
           <TextContentNews>{item.excerpt?.rendered}</TextContentNews>
         </CardNews>
-      ))}
+        ))
+      )}
 
     </Container>
   );

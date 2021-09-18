@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, RefreshControl, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
-// import axios from 'axios';
 import { Portal } from 'react-native-portalize';
 import { Modalize } from 'react-native-modalize';
+import { Feather } from '@expo/vector-icons';
 
 // import api from '../../services/api';
 
@@ -51,7 +50,7 @@ interface News {
   title?: Title;
   content?: Content;
   excerpt?: Excerpt;
-  date?: string;
+  date?: any;
 }
 
 interface Types {
@@ -70,21 +69,17 @@ const Home: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
-  // function getImage(value: string){
-  //   // let valor = value;
-  //   console.log(value);
-  //   const url = location.href;
-  //   // const match = url.match(/[^\/\\]+.jpg/);
-  //   const match = url.match(value);
-  //   console.log(match);
-  //   return;
-  // }
+  function getImage(value: any){
+    const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
+    // console.log(match);
+    return match;
+  };
 
   const navigateToSearch = useCallback(() => {
     navigation.navigate('Search');
   }, []);
 
-  const navigateToDetailNews = useCallback((newsId: number) => {
+  const navigateToDetailNews = useCallback((newsId: string) => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
 
@@ -110,16 +105,16 @@ const Home: React.FC = () => {
         // console.log(response);
         const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
         // setNews([...news, ...data]);
-        setNews(data);
+        // setNews(data);
         // setTotal(1);
         // setPage(page + 1);
+        setNews(
+          data.map((item: News) => ({
+            ...item,
+            image: getImage(item.content?.rendered)
+          }))
+        );
         setLoading(false);
-        // setNews(
-        //   data.map((item: News) => ({
-        //     ...item,
-        //     // image_url: getImage(item.content?.rendered)
-        //   }))
-        // );
       }).catch((error) => {
         console.log(error);
       });
@@ -155,10 +150,11 @@ const Home: React.FC = () => {
   const onOpen = () => {
     modalizeRef.current?.open();
   };
+
   const closeModal = () => {
     // setIdPost();
     modalizeRef.current?.close();
-  }
+  };
 
   return (
     <Container>
@@ -202,7 +198,7 @@ const Home: React.FC = () => {
         renderItem={({ item }: any) => (
           <CardNews>
 
-            <ImageNews source={{ uri: item?.image }} />
+            <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
 
             <DateNews>{formatDate(item?.date)}</DateNews>
 
@@ -240,7 +236,7 @@ const Home: React.FC = () => {
           }
         >
           <ContainerModalize>
-            <Text>Filtre por data</Text>
+            <Text style={{ textAlign: 'center' }}>Filtre por data</Text>
           </ContainerModalize>
         </Modalize>
       </Portal>
