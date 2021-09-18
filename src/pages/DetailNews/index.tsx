@@ -99,7 +99,7 @@ const DetailNews: React.FC<Props> = () => {
       {loading ? (
         <LoadingData>
           <ActivityIndicator size={25} color="#999591" />
-          <TextLoadingData>Caregando...</TextLoadingData>
+          <TextLoadingData>Carregando...</TextLoadingData>
         </LoadingData>
         ) : (
         news.map((item: News) => (
