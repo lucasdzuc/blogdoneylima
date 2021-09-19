@@ -99,8 +99,8 @@ const Search: React.FC = () => {
       });
 
     } catch (error) {
-      setNews([]);
       console.log(error);
+      setNews([]);
       // eslint-disable-next-line no-console
     }
   }
@@ -137,7 +137,7 @@ const Search: React.FC = () => {
         style={{ flex: 1, backgroundColor: '#FFF' }}
         showsVerticalScrollIndicator={true}
         contentContainerStyle={{
-          paddingVertical: 16,
+          paddingVertical: 8,
           // paddingHorizontal: 16,
         }}
       >

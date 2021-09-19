@@ -11,6 +11,7 @@ export const Container = styled.View`
 export const ContentInputSearch = styled.View`
   width: 100%;
   /* height: 60px; */
+  margin-bottom: 16px;
   padding: 0px 16px;
 `;
 
