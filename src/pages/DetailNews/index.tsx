@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Dimensions, ActivityIndicator } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import axios from 'axios'
 
 const { width } = Dimensions.get('window');
 
@@ -30,7 +31,7 @@ interface Excerpt {
 }
 
 interface News {
-  id: number;
+  id?: number;
   image?: string;
   title?: Title;
   content?: Content;

@@ -51,7 +51,7 @@ export const ContentCardNews = styled.View`
 `;
 
 export const CardNews = styled.View`
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   padding: 16px;
   border-radius: 14px;
   background: #F4F4F4;
@@ -63,16 +63,17 @@ export const ImageNews = styled.Image`
   background: #C4C4C4;
 `;
 
+export const DateNews = styled.Text`
+  font-size: 14px;
+  color: #858585;
+  padding: 8px 0px;
+`;
+
 export const TitleNews = styled.Text`
   font-size: 18px;
   color: #000;
   /* font-weight: 500; */
-  padding-bottom: 16px;
-`;
-
-export const DateNews = styled.Text`
-  color: #858585;
-  padding: 8px 0px;
+  padding-bottom: 8px;
 `;
 
 export const ContentButtonLeadMore = styled.View`

@@ -60,20 +60,24 @@ export const ImageNews = styled.Image`
   background: #C4C4C4;
 `;
 
+export const DateNews = styled.Text`
+  font-size: 14px;
+  color: #858585;
+  padding: 8px 0px;
+  /* background: lightblue; */
+`;
+
 export const TitleNews = styled.Text`
   font-size: 18px;
   color: #000;
   /* font-weight: 500; */
-  padding-bottom: 16px;
-`;
-
-export const DateNews = styled.Text`
-  color: #858585;
-  padding: 8px 0px;
+  padding-bottom: 8px;
+  /* background: lightcoral; */
 `;
 
 export const ContentButtonLeadMore = styled.View`
   padding: 8px 0px;
+  /* background: lightslategray; */
 `;
 
 export const ButtonLeadMoreNews = styled.TouchableOpacity`

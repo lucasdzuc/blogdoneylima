@@ -20,7 +20,7 @@ export const ImageNews = styled.Image`
 export const DateNews = styled.Text`
   font-size: 14px;
   color: #858585;
-  padding-top: 8px;
+  padding-top: 16px;
 `;
 
 export const TitleNews = styled.Text`
