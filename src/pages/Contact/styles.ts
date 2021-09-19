@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 export const Container = styled.ScrollView`
   flex: 1;
@@ -7,7 +9,8 @@ export const Container = styled.ScrollView`
 
 export const ContentWhatsApp = styled.View`
   margin-bottom: 16px;
-  padding: 0px 24px;
+  padding: 0px 16px;
+  padding-top: ${Platform.OS === 'ios' ? getStatusBarHeight() + 40 : 64}px;
 `;
 
 export const ButtonWhatsApp = styled.TouchableOpacity`
@@ -28,7 +31,7 @@ export const TextButtonWhatsApp = styled.Text`
 
 export const ContentInstagram = styled.View`
   margin-bottom: 16px;
-  padding: 0px 24px;
+  padding: 0px 16px;
 `;
 
 export const ButtonInstagram = styled.TouchableOpacity`
@@ -47,7 +50,7 @@ export const TextButtonInstagram = styled.Text`
 
 export const ContentFacebook = styled.View`
   margin-bottom: 16px;
-  padding: 0px 24px;
+  padding: 0px 16px;
 `;
 
 export const ButtonFacebook = styled.TouchableOpacity`
