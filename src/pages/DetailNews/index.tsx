@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Dimensions, ActivityIndicator } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 
@@ -35,7 +35,7 @@ interface News {
   title?: Title;
   content?: Content;
   excerpt?: Excerpt;
-  date?: string;
+  date?: any;
 }
 
 interface Props {
@@ -44,7 +44,7 @@ interface Props {
 
 const DetailNews: React.FC<Props> = () => {
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
   const route = useRoute();
   
   const { newsId }: any = route.params;
@@ -59,6 +59,13 @@ const DetailNews: React.FC<Props> = () => {
     // console.log(match);
     return match;
   };
+
+  // excerpt?.rendered
+  function modifiedExcerpt(value: any){
+    const modfied = value.replace(/[\<\/p\><\/p>]/g,"");
+    // const modfied = value;
+    return modfied;
+  };
   
   useEffect(() => {
     async function loadPost(){
@@ -71,20 +78,21 @@ const DetailNews: React.FC<Props> = () => {
         // console.log([response]);
         setNews([response].map((item: News) => ({
           ...item,
-          image: getImage(item.content?.rendered)
+          image: getImage(item.content?.rendered),
+          excerpt: modifiedExcerpt(item.excerpt?.rendered),
         })));
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error)
+        setLoading(false);
+        console.log(error);
       })
-
       // const response: News = await axios.get(`https://blogdoneylima.com.br/wp-json/wp/v2/posts/${newsId}`);
       // setNews([response]);
       // console.log(response);
     }
     loadPost();
-  }, []);
+  }, [newsId]);
 
   return (
     <Container
@@ -124,7 +132,7 @@ const DetailNews: React.FC<Props> = () => {
 
           {/* <TextContentNews>{item.content?.rendered}</TextContentNews> */}
 
-          <TextContentNews>{item.excerpt?.rendered}</TextContentNews>
+          <TextContentNews>{item?.excerpt}</TextContentNews>
         </CardNews>
         ))
       )}

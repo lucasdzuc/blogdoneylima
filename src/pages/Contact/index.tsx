@@ -19,19 +19,20 @@ import {
 
 const Contact: React.FC = () => {
 
-  function sendWhatsapp() {
-    Linking.openURL(`whatsapp://send?phone=558189729790`);
-  }
+  const whatsapp = `whatsapp://send?phone=558189729790`;
 
   const instagram = 'https://instagram.com/blogdoneylima';
+
+  // https://www.facebook.com/blogdoneylima
+  // const facebook = 'fb://pages/blogdoneylima';
+
+  function sendWhatsapp() {
+    Linking.openURL(whatsapp);
+  }
 
   function conectInstagram() {
     Linking.openURL(instagram);
   }
-
-  // https://www.facebook.com/blogdoneylima
-  // Linking.openURL('fb://page/blogdoneylima');
-  // const facebook = 'fb://pages/blogdoneylima';
 
   // function conectFacebook() {
   //   Linking.openURL(facebook);

@@ -11,7 +11,7 @@ import formatDate from '../../utils/formatDate';
 
 import {
   Container,
-  NewsList,
+  NewsListProvider,
   HeaderList,
   ButtonRedirectSearch,
   TextButtonRedirectSearch,
@@ -84,10 +84,6 @@ const Home: React.FC = () => {
   }, []);
 
   async function loadNews() {
-    // const response = await api.get('https://blogdoneylima.com.br/wp-json/wp/v2/posts/');
-    // console.log(response);
-    // const data = response.json();
-    // setNews(response);
     if (loading) {
       return;
     }
@@ -116,6 +112,7 @@ const Home: React.FC = () => {
         );
         setLoading(false);
       }).catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   }
@@ -169,7 +166,7 @@ const Home: React.FC = () => {
         ))}
       </ContentCardNews>  */}
 
-      <NewsList
+      <NewsListProvider
         data={news}
         keyExtractor={(item: News) => String(item.id)}
         onEndReached={loadNews}
