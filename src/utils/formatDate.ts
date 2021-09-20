@@ -7,7 +7,7 @@ export default function formatDate(date: string){
 
   // const formattedDate = format(firstDate, "dd/MM/yyyy' às 'HH:mm'");
   
-  const formattedDate = format(firstDate, "dd 'de' MMMM',  às 'HH:mm", {
+  const formattedDate = format(firstDate, "dd 'de' MMMM 'de' yyyy',  às 'HH:mm", {
     locale: pt,
   });
 
