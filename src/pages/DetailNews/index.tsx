@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Dimensions, ActivityIndicator } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import axios from 'axios'
+// import axios from 'axios'
 
 const { width } = Dimensions.get('window');
 
@@ -63,7 +63,8 @@ const DetailNews: React.FC<Props> = () => {
 
   // excerpt?.rendered
   function modifiedExcerpt(value: any){
-    const modfied = value.replace(/[\<\/p\><\/p>]/g,"");
+    // const modfied = value.replace(/[\<\/p\><\/p>]/g,"");
+    const modfied = value.replace(/<\/?[^]>/g,"");
     // const modfied = value;
     return modfied;
   };
