@@ -40,9 +40,10 @@ export const TextContentNews = styled.Text`
 `;
 
 export const LoadingData = styled.View`
-  flex: 1;
-  background: #FFF;
+  /* flex: 1; */
+  /* background: #FFF; */
   justify-content: center;
+  align-items: center;
 `;
 
 export const TextLoadingData = styled.Text`
