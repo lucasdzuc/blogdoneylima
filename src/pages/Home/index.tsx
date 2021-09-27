@@ -87,14 +87,14 @@ const Home: React.FC = () => {
     if (loading) {
       return;
     }
-    if (total > 0 && news.length   === total) {
-      return;
-    }
+    // if (total > 0 && news.length   === total) {
+    //   return;
+    // }
 
     setLoading(true);
 
-    await fetch('https://blogdoneylima.com.br/wp-json/wp/v2/posts', {
-      method: 'GET',
+    await fetch(`https://blogdoneylima.com.br/wp-json/wp/v2/posts?per_page=10&page=${page}`, {
+      method: 'GET',  
     })
       .then(response => response.json())
       .then(response => {
@@ -103,13 +103,14 @@ const Home: React.FC = () => {
         // setNews([...news, ...data]);
         // setNews(data);
         // setTotal(1);
-        // setPage(page + 1);
-        setNews(
-          data.map((item: News) => ({
+        setPage(page + 1);
+        setNews([
+          ...news,
+          ...data.map((item: News) => ({
             ...item,
             image: getImage(item.content?.rendered)
           }))
-        );
+        ]);
         setLoading(false);
       }).catch((error) => {
         setLoading(false);
@@ -119,7 +120,7 @@ const Home: React.FC = () => {
   
   useEffect(() => {
     loadNews();
-  }, [news]);
+  }, [page]);
 
   function wait(timeout: number) {
     return new Promise(resolve => {
