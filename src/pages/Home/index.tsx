@@ -18,6 +18,7 @@ import {
   ButtonFilter,
   ContentCardNews,
   CardNews,
+  ButtonDetailsNews,
   ImageNews,
   DateNews,
   TitleNews,
@@ -106,7 +107,7 @@ const Home: React.FC = () => {
         setPage(page + 1);
         setNews([
           ...news,
-          ...data.map((item: News) => ({
+          ...data.map((item: any) => ({
             ...item,
             image: getImage(item.content?.rendered)
           }))
@@ -120,7 +121,7 @@ const Home: React.FC = () => {
   
   useEffect(() => {
     loadNews();
-  }, [page]);
+  }, []);
 
   function wait(timeout: number) {
     return new Promise(resolve => {
@@ -195,8 +196,10 @@ const Home: React.FC = () => {
         ListFooterComponent={ <FooterList load={loading} /> }
         renderItem={({ item }: any) => (
           <CardNews>
-
-            <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+            
+            <ButtonDetailsNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={1}>
+              <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+            </ButtonDetailsNews>
 
             <DateNews>{formatDate(item?.date)}</DateNews>
 
