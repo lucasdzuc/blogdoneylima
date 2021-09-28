@@ -120,7 +120,7 @@ const Home: React.FC = () => {
   
   useEffect(() => {
     loadNews();
-  }, [page]);
+  }, [news]);
 
   function wait(timeout: number) {
     return new Promise(resolve => {
