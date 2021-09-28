@@ -21,6 +21,19 @@ Aplicavo de notícias Blog do Ney Lima, conecte-se e fique por dentro das princi
 -   **React Navigation Stack**
 -   **WordPress API REST**
 
+## 🔖 Layout
+
+Você pode visualizar o layout do projeto através [desse link](https://www.figma.com/file/okpY8Qz2ABteJtFGmTkatN/blogdoneylima?node-id=0%3A1). É necessário ter conta no [Figma](http://figma.com/) para acessá-lo.
+
+## Executando o projeto
+
+Utilize o **yarn** ou o **npm install** para instalar as dependências do projeto.
+Em seguida, inicie o projeto.
+
+```cl
+expo start
+``` 
+
 ## 📄 Licença
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
