@@ -3,7 +3,7 @@
 ## 💻 Projeto
 Aplicavo de notícias Blog do Ney Lima, conecte-se e fique por dentro das principais notícias da cidade de Santa Cruz do Capibaribe e Região.
 
-## :hammer_and_wrench: Features 
+## 🛠 Features 
 
 - [x] Listagem de notícias;
 - [x] Detalhes da notícias;
@@ -11,7 +11,7 @@ Aplicavo de notícias Blog do Ney Lima, conecte-se e fique por dentro das princi
 - [ ] Filtrar notícias por data;
 - [ ] Tema Escuro;
 
-## ✨ Tecnologias
+## ✨ **Tecnologias**
 
 -   **React Native**
 -   **Typescript**
