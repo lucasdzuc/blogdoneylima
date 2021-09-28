@@ -78,22 +78,26 @@ const Search: React.FC = () => {
     return match;
   };
 
-  async function loadNews(news: string): Promise<void> {
+  async function loadNews(valueSearch: string): Promise<void> {
     try {
       if (!searchValue) {
         return;
       }
 
+      const baseURL = "https://www.blogdoneylima.com.br/wp-json";
+
+      // posts?search=${valueSearch}&context=view&type=post&per_page=10
+
       await fetch(`https://www.blogdoneylima.com.br/wp-json/wp/v2/posts`, {
-        method: "GET"
+        method: "GET",
       })
       .then(response => response.json())
       .then(response => {
-        const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+        const data = response.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
         setNews(
-          data.map((item: News) => ({
+          data.map((item: any) => ({
             ...item,
-            image: getImage(item.content?.rendered)
+            // image: getImage(item.content?.rendered)
           }))
         );
       });
@@ -143,25 +147,23 @@ const Search: React.FC = () => {
       >
         <ContentCardNews>
           {news.length > 0 ? (
-            news.map(item => (
-
+            news?.map(item => (
               <CardNews>
 
-                <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+                {/* <ImageNews source={{ uri: item?.image }} resizeMode="cover" /> */}
 
-                <DateNews>{formatDate(item?.date)}</DateNews>
+                {/* <DateNews>{formatDate(item?.date)}</DateNews> */}
 
-                <TitleNews>{item.title?.rendered}</TitleNews>
+                <TitleNews>{item?.title}</TitleNews>
 
                 <ContentButtonLeadMore>
-                  <ButtonLeadMoreNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={0.6}>
+                  <ButtonLeadMoreNews onPress={() => navigateToDetailNews(item?.id)} activeOpacity={0.6}>
                     <Feather name="arrow-right" size={20} color="#Ec7C27" />
                     <TextButtonLeadMoreNews>Ver mais</TextButtonLeadMoreNews>
                   </ButtonLeadMoreNews>
                 </ContentButtonLeadMore>
 
               </CardNews>
-
             ))
           ) : (
             <>

@@ -32,6 +32,7 @@ import {
   ButtonCloseModalModalize,
   TextButtonCloseModilize,
 } from './styles';
+import nextWednesday from 'date-fns/fp/nextWednesday/index.js';
 
 interface Title {
   rendered?: string;
@@ -97,10 +98,10 @@ const Home: React.FC = () => {
     await fetch(`https://blogdoneylima.com.br/wp-json/wp/v2/posts?per_page=10&page=${page}`, {
       method: 'GET',  
     })
-      .then(response => response.json())
+      .then(response => response.json() )
       .then(response => {
         // console.log(response);
-        const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+        const data = response.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
         // setNews([...news, ...data]);
         // setNews(data);
         // setTotal(1);
@@ -121,7 +122,7 @@ const Home: React.FC = () => {
   
   useEffect(() => {
     loadNews();
-  }, []);
+  }, [news]);
 
   function wait(timeout: number) {
     return new Promise(resolve => {
@@ -194,7 +195,7 @@ const Home: React.FC = () => {
           paddingVertical: 48,
         }}
         ListFooterComponent={ <FooterList load={loading} /> }
-        renderItem={({ item }: any) => (
+        renderItem={({ item }: any ) => (
           <CardNews>
             
             <ButtonDetailsNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={1}>
