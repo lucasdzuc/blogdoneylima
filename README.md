@@ -23,7 +23,7 @@ Aplicavo de notícias Blog do Ney Lima, conecte-se e fique por dentro das princi
 
 ## 🔖 Layout
 
-Você pode visualizar o layout do projeto através [desse link](https://www.figma.com/file/okpY8Qz2ABteJtFGmTkatN/blogdoneylima?node-id=0%3A1). É necessário ter conta no [Figma](http://figma.com/) para acessá-lo.
+Você pode visualizar o layout do projeto através do [link](https://www.figma.com/file/okpY8Qz2ABteJtFGmTkatN/blogdoneylima?node-id=0%3A1).
 
 ## Executando o projeto
 
@@ -41,7 +41,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 <br />
 
 <div align="center">
-  <small margin-bottom="16px">Desenvolvido por Lucas Andrade - Setembro/2021</small>
+  <small>Desenvolvido por Lucas Andrade - Setembro/2021</small>
 
   [![Instagram Badge](https://img.shields.io/badge/-lucasdzuc-EC7C27?style=flat-square&labelColor=EC7C27&logo=instagram&logoColor=white&link=https://www.instagram.com/lucasdzuc/)](https://www.instagram.com/lucasdzuc) 
   [![Linkedin Badge](https://img.shields.io/badge/-Lucas%20Andrade-EC7C27?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-andrade-322634a8/)](https://www.linkedin.com/in/lucas-andrade-322634a8/) 
