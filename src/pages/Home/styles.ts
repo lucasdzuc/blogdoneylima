@@ -54,6 +54,8 @@ export const CardNews = styled.View`
   background: #F4F4F4;
 `;
 
+export const ButtonDetailsNews = styled.TouchableOpacity``;
+
 export const ImageNews = styled.Image`
   height: 200px;
   border-radius: 10px;

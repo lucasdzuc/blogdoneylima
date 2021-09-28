@@ -18,6 +18,7 @@ import {
   ButtonFilter,
   ContentCardNews,
   CardNews,
+  ButtonDetailsNews,
   ImageNews,
   DateNews,
   TitleNews,
@@ -31,6 +32,7 @@ import {
   ButtonCloseModalModalize,
   TextButtonCloseModilize,
 } from './styles';
+import nextWednesday from 'date-fns/fp/nextWednesday/index.js';
 
 interface Title {
   rendered?: string;
@@ -96,17 +98,17 @@ const Home: React.FC = () => {
     await fetch(`https://blogdoneylima.com.br/wp-json/wp/v2/posts?per_page=10&page=${page}`, {
       method: 'GET',  
     })
-      .then(response => response.json())
+      .then(response => response.json() )
       .then(response => {
         // console.log(response);
-        const data = response.filter((res: any)  => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+        const data = response.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
         // setNews([...news, ...data]);
         // setNews(data);
         // setTotal(1);
         setPage(page + 1);
         setNews([
           ...news,
-          ...data.map((item: News) => ({
+          ...data.map((item: any) => ({
             ...item,
             image: getImage(item.content?.rendered)
           }))
@@ -193,10 +195,12 @@ const Home: React.FC = () => {
           paddingVertical: 48,
         }}
         ListFooterComponent={ <FooterList load={loading} /> }
-        renderItem={({ item }: any) => (
+        renderItem={({ item }: any ) => (
           <CardNews>
-
-            <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+            
+            <ButtonDetailsNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={1}>
+              <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+            </ButtonDetailsNews>
 
             <DateNews>{formatDate(item?.date)}</DateNews>
 
