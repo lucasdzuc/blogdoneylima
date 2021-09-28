@@ -5,7 +5,7 @@ import { Portal } from 'react-native-portalize';
 import { Modalize } from 'react-native-modalize';
 import { Feather } from '@expo/vector-icons';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 import formatDate from '../../utils/formatDate';
 
@@ -86,38 +86,32 @@ const Home: React.FC = () => {
   }, []);
 
   async function loadNews() {
-    if (loading) {
-      return;
-    }
-    // if (total > 0 && news.length   === total) {
-    //   return;
-    // }
-
-    setLoading(true);
-
-    await fetch(`https://blogdoneylima.com.br/wp-json/wp/v2/posts?per_page=10&page=${page}`, {
-      method: 'GET',  
-    })
-      .then(response => response.json() )
-      .then(response => {
-        // console.log(response);
-        const data = response.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
-        // setNews([...news, ...data]);
-        // setNews(data);
-        // setTotal(1);
-        setPage(page + 1);
-        setNews([
-          ...news,
-          ...data.map((item: any) => ({
-            ...item,
-            image: getImage(item.content?.rendered)
-          }))
-        ]);
-        setLoading(false);
-      }).catch((error) => {
-        setLoading(false);
-        console.log(error);
+    try {
+      if (loading) {
+        return;
+      }
+      // if (total > 0 && news.length === total) {
+      //   return;
+      // }
+      setLoading(true);
+      const response = await api.get(`/wp/v2/posts?per_page=10&page=${page}`, {
+        method: 'GET',  
       });
+      // console.log(response);
+      setPage(page + 1);
+      const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+      setNews([
+        ...news,
+        ...data.map((item: News) => ({
+          ...item,
+          image: getImage(item.content?.rendered)
+        }))
+      ]);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error)
+    }
   }
   
   useEffect(() => {
