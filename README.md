@@ -1,4 +1,4 @@
-![cover](.github/Capa.png?style=flat)
+![cover](.github/cover.png?style=flat)
 
 ## 💻 Projeto
 Aplicavo de notícias Blog do Ney Lima, conecte-se e fique por dentro das principais notícias da cidade de Santa Cruz do Capibaribe e Região.
