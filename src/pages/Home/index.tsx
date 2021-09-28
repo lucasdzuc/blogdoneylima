@@ -90,14 +90,20 @@ const Home: React.FC = () => {
       if (loading) {
         return;
       }
-      // if (total > 0 && news.length === total) {
-      //   return;
-      // }
+      if (total > 0 && news.length === total) {
+        return;
+      }
       setLoading(true);
-      const response = await api.get(`/wp/v2/posts?per_page=10&page=${page}`, {
-        method: 'GET',  
+      const response = await api.get(`/wp/v2/posts`, {
+        method: 'GET',
+        params: {
+          page,
+          _per_page: 10
+        }
       });
+      // console.log(response.headers);
       // console.log(response);
+      setTotal(response.headers['x-wp-total']);
       setPage(page + 1);
       const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
       setNews([
