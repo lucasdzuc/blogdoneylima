@@ -73,9 +73,9 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         value={value}
         placeholderTextColor="#858585"
         keyboardAppearance="dark"
-        testID="search-input"
         autoCompleteType="off"
         clearButtonMode="while-editing"
+        testID="search-input"
         {...rest}
       />
       

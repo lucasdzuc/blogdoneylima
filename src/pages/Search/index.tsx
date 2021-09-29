@@ -113,7 +113,7 @@ const Search: React.FC = () => {
       setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(false)
+      // setLoading(false);
       setNews([]);
       // eslint-disable-next-line no-console
     }
@@ -161,7 +161,7 @@ const Search: React.FC = () => {
         <ContentCardNews>
           {news.length > 0 ? (
             news.map((item: any, index) => (
-              <CardNews key={index}>
+              <CardNews key={item.id}>
 
                 <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
 
@@ -178,9 +178,16 @@ const Search: React.FC = () => {
 
               </CardNews>
             ))
+            
             // <View />
           ) : (
             <>
+            {loading === true && searchValue.length > 0 ? (
+              <View>
+                <Text>Pesquisando...</Text>
+              </View>
+            ) : (
+              <>
               {searchValue.length > 0 && news.length === 0 && (
                 <MessageOrgNameNotExist>
                   <TextMessageOrgNameNotExist>Não encontramos notícias com este nome!</TextMessageOrgNameNotExist>
@@ -194,6 +201,8 @@ const Search: React.FC = () => {
                   </TextInfoMessageScreen>
                 </InfoMessageScreen>
               )}
+              </>
+            )}
             </>
           )}
         </ContentCardNews>

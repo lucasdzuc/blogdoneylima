@@ -32,7 +32,6 @@ import {
   ButtonCloseModalModalize,
   TextButtonCloseModilize,
 } from './styles';
-import nextWednesday from 'date-fns/fp/nextWednesday/index.js';
 
 interface Title {
   rendered?: string;
@@ -56,10 +55,10 @@ interface News {
 }
 
 interface Types {
-  formatDate(): void
+  formatDate(arg0: string): void
 }
 
-const Home: React.FC = () => {
+const Home: React.FC<Types> = () => {
 
   const modalizeRef = useRef<Modalize>(null);
 
@@ -71,12 +70,6 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  function getImage(value: any){
-    const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
-    // console.log(match);
-    return match;
-  };
-
   const navigateToSearch = useCallback(() => {
     navigation.navigate('Search');
   }, []);
@@ -84,6 +77,14 @@ const Home: React.FC = () => {
   const navigateToDetailNews = useCallback((newsId: string) => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
+
+  function getImage(value: any) {
+    const [match] = value?.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
+    // console.log(match);
+    // const { 0: image } = match;
+    // console.log(image);
+    return match;
+  };
 
   async function loadNews() {
     try {
@@ -100,22 +101,20 @@ const Home: React.FC = () => {
           _per_page: 10,
         }
       });
-      // console.log(response.headers);
-      // console.log(response);
       setTotal(response.headers['x-wp-total']);
       setPage(page + 1);
-      const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+      // const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
       setNews([
         ...news,
-        ...data.map((item: any) => ({
+        ...response.data.map((item: any) => ({
           ...item,
           image: getImage(item.content?.rendered)
-        }))
+        })).filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>")
       ]);
       setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.log(error);
+      setLoading(false);
     }
   }
   
