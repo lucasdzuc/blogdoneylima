@@ -237,7 +237,7 @@ const Home: React.FC = () => {
           }
         >
           <ContainerModalize>
-            <Text style={{ textAlign: 'center' }}>Filtre por data</Text>
+            <Text style={{ textAlign: 'center' }}>Em breve</Text>
           </ContainerModalize>
         </Modalize>
       </Portal>

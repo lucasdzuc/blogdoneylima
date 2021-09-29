@@ -41,8 +41,16 @@ export const IconLeft = styled(Feather)`
   margin: 0px 24px;
 `;
 
+export const IconRightExtra = styled(Feather)`
+  /* margin: 0px 16px; */
+  padding: 4px;
+  /* background: lightskyblue; */
+`;
+
 export const IconRight = styled(Feather)`
-  margin: 0px 24px;
+  margin: 0px 24px 0px 8px;
+  padding: 4px;
+  /* background: lightgreen; */
 `;
 
 export const ButtonGoBack = styled.TouchableOpacity``;

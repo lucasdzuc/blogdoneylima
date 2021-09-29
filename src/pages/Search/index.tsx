@@ -95,33 +95,36 @@ const Search: React.FC = () => {
         //   _subtype: "post",
         // }
       });
-      // console.log(response.data);
-      setNews(response.data);
+      // setNews(response.data);
 
-      // setTotal(response.headers['x-wp-total']);
+      setTotal(response.headers['x-wp-total']);
       // setPage(page + 1);
       // const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
-      // setNews(
-      //   response.data.map((item: News) => ({
-      //     ...item,
-      //     // image: getImage(item.content?.rendered)
-      //   }))
-      // );
+      setNews(
+        response.data.map((item: News) => ({
+          // ...item,
+          id: item.id,
+          title: item.title?.rendered,
+          excerpt: item.excerpt?.rendered,
+          image: getImage(item.content?.rendered),
+          date: item.date,
+        }))
+      );
       setLoading(false);
     } catch (error) {
-      setLoading(false)
       console.log(error);
+      setLoading(false)
       setNews([]);
       // eslint-disable-next-line no-console
     }
   }
 
-  // function handleChange(value: string) {
-    // setSearchValue(value);
-    // debounce(function () {
-    //   loadNews(value);
-    // }, 300)
-  // };
+  function handleChange(value: string) {
+    setSearchValue(value);
+    debounce(function () {
+      loadNews(value);
+    }, 300)
+  };
 
   const handleClearInput = () => {
     setSearchValue('');
@@ -132,7 +135,7 @@ const Search: React.FC = () => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
 
-  console.log(news);
+  // console.log(news);
 
   return (
     <Container>
@@ -140,10 +143,10 @@ const Search: React.FC = () => {
       <ContentInputSearch>
         <SearchInput
           value={searchValue}
-          onChangeText={(text) => setSearchValue(text)}
+          onChangeText={(text) => handleChange(text)}
           placeholder="Pesquisar notícias..."
           handleClearInput={handleClearInput}
-          handleSearch={() => loadNews(searchValue)}
+          // handleSearch={() => loadNews(searchValue)}
         />
       </ContentInputSearch>
 
@@ -156,13 +159,13 @@ const Search: React.FC = () => {
         }}
       >
         <ContentCardNews>
-          {news?.length > 0 ? (
-            news.map((item: News, index) => (
+          {news.length > 0 ? (
+            news.map((item: any, index) => (
               <CardNews key={index}>
 
-                {/* <ImageNews source={{ uri: item?.image }} resizeMode="cover" /> */}
+                <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
 
-                {/* <DateNews>{formatDate(item?.date)}</DateNews> */}
+                <DateNews>{formatDate(item?.date)}</DateNews>
 
                 <TitleNews>{item?.title}</TitleNews>
 
@@ -175,13 +178,14 @@ const Search: React.FC = () => {
 
               </CardNews>
             ))
+            // <View />
           ) : (
             <>
-              {/* {searchValue.length > 0 && news.length === 0 && (
+              {searchValue.length > 0 && news.length === 0 && (
                 <MessageOrgNameNotExist>
                   <TextMessageOrgNameNotExist>Não encontramos notícias com este nome!</TextMessageOrgNameNotExist>
                 </MessageOrgNameNotExist>
-              )} */}
+              )}
               {searchValue.length === 0 && news.length === 0 && (
                 <InfoMessageScreen>
                   {/* <ImageInfoSearch width={200} height={200} /> */}

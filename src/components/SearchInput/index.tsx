@@ -5,12 +5,19 @@ import { useNavigation } from '@react-navigation/native';
 // IMPORT DEBOUNCE
 // import useDebounce from '../../utils/useDebounce';
 
-import { Container, TextInput, IconLeft, IconRight, ButtonGoBack } from './styles';
+import { 
+  Container, 
+  TextInput, 
+  IconLeft, 
+  IconRight, 
+  IconRightExtra,
+  ButtonGoBack,
+} from './styles';
 
 interface InputProps extends TextInputProps {
   name?: string;
   handleClearInput(): void;
-  handleSearch(): void;
+  // handleSearch(): void;
 }
 
 interface InputRef {
@@ -18,7 +25,7 @@ interface InputRef {
 }
 
 const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = (
-  { value = '', handleSearch, handleClearInput, ...rest }) => {
+  { value = '', handleClearInput, ...rest }) => {
 
   const inputRef = useRef<any>(null);
 
@@ -70,7 +77,7 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         {...rest}
       />
       
-      {/* {value.length > 0 && (
+      {value.length > 0 ? (
         Platform.OS !== 'ios' && (
           <IconRight
             name="x" 
@@ -79,13 +86,14 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = (
             onPress={handleClearInput}
           />
         )
-      )} */}
-      <IconRight
-        name="search"
-        size={22}
-        color={isFocused || isFilled ? '#Ec7C27' : '#858585'}
-        onPress={handleSearch}
-      />
+      ) : (
+        <IconRight
+          name="search"
+          size={22}
+          color={isFocused || isFilled ? '#Ec7C27' : '#858585'}
+          // onPress={handleSearch}
+        />
+      )}
     </Container>
   );
 };
