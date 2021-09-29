@@ -99,9 +99,9 @@ const Search: React.FC = () => {
 
       setTotal(response.headers['x-wp-total']);
       // setPage(page + 1);
-      // const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
+      const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
       setNews(
-        response.data.map((item: News) => ({
+        data.map((item: News) => ({
           // ...item,
           id: item.id,
           title: item.title?.rendered,
@@ -144,7 +144,7 @@ const Search: React.FC = () => {
         <SearchInput
           value={searchValue}
           onChangeText={(text) => handleChange(text)}
-          placeholder="Pesquisar notícias..."
+          placeholder="Pesquisar notícia..."
           handleClearInput={handleClearInput}
           // handleSearch={() => loadNews(searchValue)}
         />
