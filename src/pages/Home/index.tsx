@@ -66,12 +66,12 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
 
   const [news, setNews] = useState<News[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  function getImage(value: strinf){
+  function getImage(value: any){
     const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
     // console.log(match);
     return match;
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
       const response = await api.get(`/wp/v2/posts`, {
         params: {
           page,
-          _per_page: 10
+          _per_page: 10,
         }
       });
       // console.log(response.headers);
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error)
+      console.log(error);
     }
   }
   
@@ -127,7 +127,7 @@ const Home: React.FC = () => {
     return new Promise(resolve => {
       setTimeout(resolve, timeout);
     });
-  }
+  };
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -144,7 +144,7 @@ const Home: React.FC = () => {
         <ActivityIndicator size={24} color="#999591" />
       </View>
     )
-  }
+  };
 
   const onOpen = () => {
     modalizeRef.current?.open();

@@ -10,13 +10,15 @@ import { Container, TextInput, IconLeft, IconRight, ButtonGoBack } from './style
 interface InputProps extends TextInputProps {
   name?: string;
   handleClearInput(): void;
+  handleSearch(): void;
 }
 
 interface InputRef {
   focus(): void;
 }
 
-const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ value = '', handleClearInput, ...rest }) => {
+const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = (
+  { value = '', handleSearch, handleClearInput, ...rest }) => {
 
   const inputRef = useRef<any>(null);
 
@@ -68,7 +70,7 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ val
         {...rest}
       />
       
-      {value.length > 0 ? (
+      {/* {value.length > 0 && (
         Platform.OS !== 'ios' && (
           <IconRight
             name="x" 
@@ -77,13 +79,13 @@ const SearchInput: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ val
             onPress={handleClearInput}
           />
         )
-      ) : (
-        <IconRight
-          name="search"
-          size={22}
-          color={isFocused || isFilled ? '#Ec7C27' : '#858585'}
-        />
-      )}
+      )} */}
+      <IconRight
+        name="search"
+        size={22}
+        color={isFocused || isFilled ? '#Ec7C27' : '#858585'}
+        onPress={handleSearch}
+      />
     </Container>
   );
 };

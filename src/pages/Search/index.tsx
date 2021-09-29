@@ -87,22 +87,22 @@ const Search: React.FC = () => {
       }
       setLoading(true);
       // search=${valueSearch}&context=view&type=post&per_page=10
-      const response = await api.get(`/wp/v2/search=${valueSearch}`, {
-        params: {
-          // page,
-          _context: "view",
-          _type: "post",
-          _post_type: "post",
-          _subtype: "page",
-          // _per_page: 10,
-        }
+      const response = await api.get(`/wp/v2/posts?search=${valueSearch}`, {
+        // params: {
+        //   _context: "view",
+        //   _type: "post",
+        //   _post_type: "post",
+        //   _subtype: "post",
+        // }
       });
-      console.log(response.data);
+      // console.log(response.data);
+      setNews(response.data);
+
       // setTotal(response.headers['x-wp-total']);
       // setPage(page + 1);
       // const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
       // setNews(
-      //   data.map((item: News) => ({
+      //   response.data.map((item: News) => ({
       //     ...item,
       //     // image: getImage(item.content?.rendered)
       //   }))
@@ -116,12 +116,12 @@ const Search: React.FC = () => {
     }
   }
 
-  function handleChange(value: string) {
-    setSearchValue(value);
-    debounce(function () {
-      loadNews(value);
-    }, 300)
-  };
+  // function handleChange(value: string) {
+    // setSearchValue(value);
+    // debounce(function () {
+    //   loadNews(value);
+    // }, 300)
+  // };
 
   const handleClearInput = () => {
     setSearchValue('');
@@ -132,15 +132,18 @@ const Search: React.FC = () => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
 
+  console.log(news);
+
   return (
     <Container>
-
+  
       <ContentInputSearch>
         <SearchInput
           value={searchValue}
-          onChangeText={(text) => handleChange(text)}
+          onChangeText={(text) => setSearchValue(text)}
           placeholder="Pesquisar notícias..."
           handleClearInput={handleClearInput}
+          handleSearch={() => loadNews(searchValue)}
         />
       </ContentInputSearch>
 
@@ -153,9 +156,9 @@ const Search: React.FC = () => {
         }}
       >
         <ContentCardNews>
-          {news.length > 0 ? (
-            news?.map(item => (
-              <CardNews key={item.id}>
+          {news?.length > 0 ? (
+            news.map((item: News, index) => (
+              <CardNews key={index}>
 
                 {/* <ImageNews source={{ uri: item?.image }} resizeMode="cover" /> */}
 
@@ -174,12 +177,11 @@ const Search: React.FC = () => {
             ))
           ) : (
             <>
-              {searchValue.length > 0 && news.length === 0 && (
+              {/* {searchValue.length > 0 && news.length === 0 && (
                 <MessageOrgNameNotExist>
-                  {/* <EmojiTristeIcon width={20} height={20} /> */}
                   <TextMessageOrgNameNotExist>Não encontramos notícias com este nome!</TextMessageOrgNameNotExist>
                 </MessageOrgNameNotExist>
-              )}
+              )} */}
               {searchValue.length === 0 && news.length === 0 && (
                 <InfoMessageScreen>
                   {/* <ImageInfoSearch width={200} height={200} /> */}
