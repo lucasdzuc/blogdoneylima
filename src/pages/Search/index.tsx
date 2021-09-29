@@ -183,7 +183,7 @@ const Search: React.FC = () => {
           ) : (
             <>
             {loading === true && searchValue.length > 0 ? (
-              <View>
+              <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
                 <Text>Pesquisando...</Text>
               </View>
             ) : (

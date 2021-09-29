@@ -173,8 +173,8 @@ const Home: React.FC<Types> = () => {
         onEndReached={loadNews}
         onEndReachedThreshold={0.1}
         contentContainerStyle={{
-          // paddingVertical: 8,
           paddingHorizontal: 16,
+          // paddingVertical: 8,
         }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         ListHeaderComponent={
