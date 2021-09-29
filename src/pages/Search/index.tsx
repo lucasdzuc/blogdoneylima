@@ -2,10 +2,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, ScrollView, Image, Alert, TextInputProps } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-// import axios from 'axios';
 
 // IMPORT API SERVER
-// import api from '../../services/api';
+import api from '../../services/api';
 
 // import useDebouncePromise from '../../utils/useDebouncePromise';
 import useDebounce from '../../utils/useDebounce';
@@ -68,7 +67,10 @@ const Search: React.FC = () => {
   // const searchRef = useRef<any>(null);
 
   const [news, setNews] = useState<News[]>([]);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
   // const [isFavorite, setIsFavorite] = useState(false);
   const { debounce } = useDebounce();
 
@@ -83,26 +85,31 @@ const Search: React.FC = () => {
       if (!searchValue) {
         return;
       }
-
-      const baseURL = "https://www.blogdoneylima.com.br/wp-json";
-
-      // posts?search=${valueSearch}&context=view&type=post&per_page=10
-
-      await fetch(`https://www.blogdoneylima.com.br/wp-json/wp/v2/posts`, {
-        method: "GET",
-      })
-      .then(response => response.json())
-      .then(response => {
-        const data = response.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
-        setNews(
-          data.map((item: any) => ({
-            ...item,
-            // image: getImage(item.content?.rendered)
-          }))
-        );
+      setLoading(true);
+      // search=${valueSearch}&context=view&type=post&per_page=10
+      const response = await api.get(`/wp/v2/search=${valueSearch}`, {
+        params: {
+          // page,
+          _context: "view",
+          _type: "post",
+          _post_type: "post",
+          _subtype: "page",
+          // _per_page: 10,
+        }
       });
-
+      console.log(response.data);
+      // setTotal(response.headers['x-wp-total']);
+      // setPage(page + 1);
+      // const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
+      // setNews(
+      //   data.map((item: News) => ({
+      //     ...item,
+      //     // image: getImage(item.content?.rendered)
+      //   }))
+      // );
+      setLoading(false);
     } catch (error) {
+      setLoading(false)
       console.log(error);
       setNews([]);
       // eslint-disable-next-line no-console
@@ -148,7 +155,7 @@ const Search: React.FC = () => {
         <ContentCardNews>
           {news.length > 0 ? (
             news?.map(item => (
-              <CardNews>
+              <CardNews key={item.id}>
 
                 {/* <ImageNews source={{ uri: item?.image }} resizeMode="cover" /> */}
 

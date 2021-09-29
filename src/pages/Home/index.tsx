@@ -71,7 +71,7 @@ const Home: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
-  function getImage(value: any){
+  function getImage(value: strinf){
     const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
     // console.log(match);
     return match;
@@ -95,7 +95,6 @@ const Home: React.FC = () => {
       }
       setLoading(true);
       const response = await api.get(`/wp/v2/posts`, {
-        method: 'GET',
         params: {
           page,
           _per_page: 10
@@ -108,7 +107,7 @@ const Home: React.FC = () => {
       const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
       setNews([
         ...news,
-        ...data.map((item: News) => ({
+        ...data.map((item: any) => ({
           ...item,
           image: getImage(item.content?.rendered)
         }))

@@ -59,7 +59,7 @@ export const CardNews = styled.View`
 `;
 
 export const ImageNews = styled.Image`
-  height: 100px;
+  height: 200px;
   border-radius: 10px;
   background: #C4C4C4;
 `;
