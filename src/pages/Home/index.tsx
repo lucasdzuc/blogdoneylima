@@ -79,10 +79,11 @@ const Home: React.FC<Types> = () => {
   }, []);
 
   function getImage(value: any) {
-    const [match] = value?.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
+    const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
     // console.log(match);
     // const { 0: image } = match;
     // console.log(image);
+    // const x = match.map();
     return match;
   };
 
@@ -98,7 +99,7 @@ const Home: React.FC<Types> = () => {
       const response = await api.get(`/wp/v2/posts`, {
         params: {
           page,
-          _per_page: 10,
+          // _per_page: 10,
         }
       });
       setTotal(response.headers['x-wp-total']);
@@ -108,7 +109,8 @@ const Home: React.FC<Types> = () => {
         ...news,
         ...response.data.map((item: any) => ({
           ...item,
-          image: getImage(item.content?.rendered)
+          image: getImage(item.content?.rendered),
+          // image: item.content?.rendered,
         })).filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>")
       ]);
       setLoading(false);
@@ -198,6 +200,7 @@ const Home: React.FC<Types> = () => {
             
             <ButtonDetailsNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={1}>
               <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+              {/* <ImageNews source={{ uri: getImage(item?.image) }} resizeMode="cover" /> */}
             </ButtonDetailsNews>
 
             <DateNews>{formatDate(item?.date)}</DateNews>

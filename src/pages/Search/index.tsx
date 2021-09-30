@@ -99,16 +99,16 @@ const Search: React.FC = () => {
 
       setTotal(response.headers['x-wp-total']);
       // setPage(page + 1);
-      const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
+      // const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
       setNews(
-        data.map((item: News) => ({
+        response.data.map((item: News) => ({
           // ...item,
           id: item.id,
           title: item.title?.rendered,
           excerpt: item.excerpt?.rendered,
           image: getImage(item.content?.rendered),
           date: item.date,
-        }))
+        })).filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>")
       );
       setLoading(false);
     } catch (error) {
