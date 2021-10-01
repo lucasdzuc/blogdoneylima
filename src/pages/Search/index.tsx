@@ -178,8 +178,6 @@ const Search: React.FC = () => {
 
               </CardNews>
             ))
-            
-            // <View />
           ) : (
             <>
             {loading === true && searchValue.length > 0 ? (

@@ -80,11 +80,11 @@ const Home: React.FC<Types> = () => {
 
   function getImage(value: any) {
     const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
-    // console.log(match);
+    console.log(match);
     // const { 0: image } = match;
     // console.log(image);
     // const x = match.map();
-    return match;
+    // return match;
   };
 
   async function loadNews() {
@@ -99,7 +99,7 @@ const Home: React.FC<Types> = () => {
       const response = await api.get(`/wp/v2/posts`, {
         params: {
           page,
-          // _per_page: 10,
+          _per_page: 10,
         }
       });
       setTotal(response.headers['x-wp-total']);
