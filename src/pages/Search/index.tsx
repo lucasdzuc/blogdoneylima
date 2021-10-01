@@ -88,17 +88,18 @@ const Search: React.FC = () => {
       setLoading(true);
       // search=${valueSearch}&context=view&type=post&per_page=10
       const response = await api.get(`/wp/v2/posts?search=${valueSearch}`, {
-        // params: {
-        //   _context: "view",
-        //   _type: "post",
-        //   _post_type: "post",
-        //   _subtype: "post",
-        // }
+        params: {
+          page,
+          _per_page: 10,
+          _context: "view",
+          _type: "post",
+          _post_type: "post",
+          _subtype: "post",
+        }
       });
       // setNews(response.data);
-
       setTotal(response.headers['x-wp-total']);
-      // setPage(page + 1);
+      setPage(page + 1);
       // const data = response.data.filter((res: any)  => res.title !== "<NO>" && res.title !== "<no>");
       setNews(
         response.data.map((item: News) => ({

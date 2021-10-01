@@ -48,6 +48,7 @@ export const TextInput = styled.TextInput`
 export const ButtonSearch = styled.TouchableOpacity``;
 
 export const ContentCardNews = styled.View`
+  flex: 1;
   padding: 8px 16px 0px;
 `;
 

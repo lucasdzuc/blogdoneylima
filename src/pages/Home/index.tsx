@@ -80,7 +80,7 @@ const Home: React.FC<Types> = () => {
 
   function getImage(value: any) {
     const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
-    console.log(match);
+    // console.log(match);
     // const { 0: image } = match;
     // console.log(image);
     // const x = match.map();
@@ -107,11 +107,11 @@ const Home: React.FC<Types> = () => {
       // const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
       setNews([
         ...news,
-        ...response.data.map((item: any) => ({
+        ...response.data.map((item: News) => ({
           ...item,
           image: getImage(item.content?.rendered),
           // image: item.content?.rendered,
-        })).filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>")
+        })).filter((res: any) => res.title?.rendered !== "<NO>" && res.title?.rendered !== "<no>")
       ]);
       setLoading(false);
     } catch (error) {
@@ -159,16 +159,6 @@ const Home: React.FC<Types> = () => {
   return (
     <Container>
 
-      {/* <ContentCardNews>
-        <Text>FEED</Text>
-        {news?.map((newspost: News) => (
-          <CardNews key={newspost.id}>
-            <Text>{newspost.title?.rendered}</Text>
-            <Text>{newspost.date}</Text>
-          </CardNews>
-        ))}
-      </ContentCardNews>  */}
-
       <NewsListProvider
         data={news}
         keyExtractor={(item: News) => String(item.id)}
@@ -205,7 +195,7 @@ const Home: React.FC<Types> = () => {
 
             <DateNews>{formatDate(item?.date)}</DateNews>
 
-            <TitleNews>{item.title?.rendered}</TitleNews>
+            <TitleNews>{item?.title}</TitleNews>
 
             <ContentButtonLeadMore>
               <ButtonLeadMoreNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={0.6}>
