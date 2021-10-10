@@ -74,18 +74,24 @@ const Home: React.FC<Types> = () => {
     navigation.navigate('Search');
   }, []);
 
-  const navigateToDetailNews = useCallback((newsId: string) => {
+  const navigateToDetailNews = useCallback((newsId: any) => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
 
-  function getImage(value: any) {
-    const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/);
-    // console.log(match);
-    // const { 0: image } = match;
-    // console.log(image);
-    // const x = match.map();
-    // return match;
-  };
+  // function getImage(value: any) {
+    
+  //   const content = value.slice(0, 780);
+    
+  //   const match = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/i);
+
+  //   const interetor = match[Symbol.iterator]();
+
+  //   const formatImage = interetor.next().value;
+    
+  //   console.log([formatImage]);
+
+  //   return formatImage;
+  // };
 
   async function loadNews() {
     try {
@@ -102,16 +108,18 @@ const Home: React.FC<Types> = () => {
           _per_page: 10,
         }
       });
+      // const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
+      // .filter((res: any) => res.title?.rendered !== "<NO>" && res.title?.rendered !== "<no>")
       setTotal(response.headers['x-wp-total']);
       setPage(page + 1);
-      // const data = response.data.filter((res: any) => res.title.rendered !== "<NO>" && res.title.rendered !== "<no>");
       setNews([
         ...news,
         ...response.data.map((item: News) => ({
-          ...item,
-          image: getImage(item.content?.rendered),
-          // image: item.content?.rendered,
-        })).filter((res: any) => res.title?.rendered !== "<NO>" && res.title?.rendered !== "<no>")
+          id: item?.id,
+          title: item.title?.rendered,
+          content: item.content?.rendered,
+          date: item.date,
+        })).filter((res: any) => res.title !== "<NO>" && res.title !== "<no>"),
       ]);
       setLoading(false);
     } catch (error) {
@@ -156,12 +164,14 @@ const Home: React.FC<Types> = () => {
     modalizeRef.current?.close();
   };
 
+  // console.log(news);
+
   return (
     <Container>
 
       <NewsListProvider
         data={news}
-        keyExtractor={(item: News) => String(item.id)}
+        keyExtractor={(item: any) => String(item.id)}
         onEndReached={loadNews}
         onEndReachedThreshold={0.1}
         contentContainerStyle={{
@@ -185,12 +195,15 @@ const Home: React.FC<Types> = () => {
           paddingVertical: 48,
         }}
         ListFooterComponent={ <FooterList load={loading} /> }
-        renderItem={({ item }: any ) => (
+        renderItem={({ item }: any) => (
           <CardNews>
             
             <ButtonDetailsNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={1}>
-              <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
-              {/* <ImageNews source={{ uri: getImage(item?.image) }} resizeMode="cover" /> */}
+              {/* {item.image.map((img: any) => console.log(img))} */}
+                {/* <ImageNews source={{ uri: img?.value }} resizeMode="cover" /> */}
+                {/* <ImageNews source={{ uri: item?.value }} resizeMode="cover" /> */}
+              {/* <ImageNews source={{ uri: getImage(item.content) }} resizeMode="cover" /> */}
+              <ImageNews source={{ uri: item.content?.rendered }} resizeMode="cover" />
             </ButtonDetailsNews>
 
             <DateNews>{formatDate(item?.date)}</DateNews>

@@ -132,7 +132,7 @@ const Search: React.FC = () => {
     setNews([]);
   };
 
-  const navigateToDetailNews = useCallback((newsId: number) => {
+  const navigateToDetailNews = useCallback((newsId: any) => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
 
