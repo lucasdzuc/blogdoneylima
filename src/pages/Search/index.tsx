@@ -26,6 +26,7 @@ import {
   ButtonSearch,
   ContentCardNews,
   CardNews,
+  ButtonDetailsNews,
   ImageNews,
   DateNews,
   TitleNews,
@@ -164,7 +165,9 @@ const Search: React.FC = () => {
             news.map((item: any, index) => (
               <CardNews key={item.id}>
 
-                <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+                <ButtonDetailsNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={1}>
+                  <ImageNews source={{ uri: item?.image }} resizeMode="cover" />
+                </ButtonDetailsNews>
 
                 <DateNews>{formatDate(item?.date)}</DateNews>
 
