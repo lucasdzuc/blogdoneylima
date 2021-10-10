@@ -90,7 +90,7 @@ const Search: React.FC = () => {
       const response = await api.get(`/wp/v2/posts?search=${valueSearch}`, {
         params: {
           page,
-          _per_page: 10,
+          _per_page: 100,
           _context: "view",
           _type: "post",
           _post_type: "post",
