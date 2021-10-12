@@ -28,9 +28,9 @@ Você pode visualizar o layout do projeto através do [link](https://www.figma.c
 
 ## 📱 Testar aplicativo
 
-Baixe o aplicativo e teste em seu smartphone.
+Baixe o aplicativo e teste em seu Smartphone.
 
-Android: [**BAIXAR**](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40lucasdzuc/blogdoneylima-b6e7267c13ef4867afefcd85214fd4f2-signed.apk)
+- [**ANDROID**](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40lucasdzuc/blogdoneylima-b6e7267c13ef4867afefcd85214fd4f2-signed.apk)
 
 ## Executando o projeto
 
