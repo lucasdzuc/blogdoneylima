@@ -43,7 +43,9 @@ expo start
 
 ## 📄 Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+<!-- Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes. -->
+
+Este projeto não pode ser reproduzido, distribuído ou modificado.
 
 <br />
 
