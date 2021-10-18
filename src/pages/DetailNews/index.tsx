@@ -86,8 +86,8 @@ const DetailNews: React.FC<Props> = () => {
         setLoading(false);
       })
       .catch((error) => {
+        // console.log(error);
         setLoading(false);
-        console.log(error);
       })
       // const response: News = await axios.get(`https://blogdoneylima.com.br/wp-json/wp/v2/posts/${newsId}`);
       // setNews([response]);

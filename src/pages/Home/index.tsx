@@ -78,20 +78,20 @@ const Home: React.FC<Types> = () => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
 
-  // function getImage(value: any) {
+  function getImage(value: any) {
     
-  //   const content = value.slice(0, 780);
+    // const content = value.slice(0, 780);
     
-  //   const match = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/i);
+    const match = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/i);
 
-  //   const interetor = match[Symbol.iterator]();
+    const interetor = match[Symbol.iterator]();
 
-  //   const formatImage = interetor.next().value;
+    const formatImage = interetor.next().value;
     
-  //   console.log([formatImage]);
+    // console.log(formatImage);
 
-  //   return formatImage;
-  // };
+    return formatImage;
+  };
 
   async function loadNews() {
     try {
@@ -123,7 +123,7 @@ const Home: React.FC<Types> = () => {
       ]);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setLoading(false);
     }
   }
@@ -138,13 +138,31 @@ const Home: React.FC<Types> = () => {
     });
   };
 
-  const onRefresh = useCallback(() => {
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
 
-    loadNews();
+    setLoading(true);
+      const response = await api.get(`/wp/v2/posts`, {
+        params: {
+          page,
+          _per_page: 10,
+        }
+      });
+      setTotal(response.headers['x-wp-total']);
+      setPage(page + 1);
+      setNews([
+        ...news,
+        ...response.data.map((item: News) => ({
+          id: item?.id,
+          title: item.title?.rendered,
+          content: item.content?.rendered,
+          date: item.date,
+        })).filter((res: any) => res.title !== "<NO>" && res.title !== "<no>"),
+      ]);
+      setLoading(false);
 
     wait(1000).then(() => setRefreshing(false));
-  }, [refreshing]);
+  }, [refreshing, news]);
 
   function FooterList({ load }: any){
     if (!load) return null;
@@ -202,8 +220,8 @@ const Home: React.FC<Types> = () => {
               {/* {item.image.map((img: any) => console.log(img))} */}
                 {/* <ImageNews source={{ uri: img?.value }} resizeMode="cover" /> */}
                 {/* <ImageNews source={{ uri: item?.value }} resizeMode="cover" /> */}
-              {/* <ImageNews source={{ uri: getImage(item.content) }} resizeMode="cover" /> */}
-              <ImageNews source={{ uri: item.content?.rendered }} resizeMode="cover" />
+              <ImageNews source={{ uri: getImage(item.content) }} resizeMode="cover" />
+              {/* <ImageNews source={{ uri: item.content?.rendered }} resizeMode="cover" /> */}
             </ButtonDetailsNews>
 
             <DateNews>{formatDate(item?.date)}</DateNews>

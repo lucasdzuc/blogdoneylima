@@ -114,8 +114,8 @@ const Search: React.FC = () => {
       );
       setLoading(false);
     } catch (error) {
-      console.log(error);
-      // setLoading(false);
+      // console.log(error);
+      setLoading(false);
       setNews([]);
       // eslint-disable-next-line no-console
     }
