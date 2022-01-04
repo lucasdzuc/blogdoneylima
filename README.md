@@ -52,6 +52,6 @@ Este projeto não pode ser reproduzido, distribuído ou modificado.
 <div align="center">
   <small>Desenvolvido por Lucas Andrade - Setembro/2021</small>
 
-  [![Instagram Badge](https://img.shields.io/badge/-lucasdzuc-EC7C27?style=flat-square&labelColor=EC7C27&logo=instagram&logoColor=white&link=https://www.instagram.com/lda.designer/)](https://www.instagram.com/lda.designer) 
+  [![Instagram Badge](https://img.shields.io/badge/-lda.designer-EC7C27?style=flat-square&labelColor=EC7C27&logo=instagram&logoColor=white&link=https://www.instagram.com/lda.designer/)](https://www.instagram.com/lda.designer) 
   [![Linkedin Badge](https://img.shields.io/badge/-Lucas%20Andrade-EC7C27?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-andrade-322634a8/)](https://www.linkedin.com/in/lucas-andrade-322634a8/) 
 </div>
