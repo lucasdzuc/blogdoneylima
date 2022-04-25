@@ -1,32 +1,44 @@
 import React, { createContext, useState, useCallback } from 'react';
 import { Share } from 'react-native';
+// import Share from 'react-native-share';
 
-interface ILink {
-  link?: string;
+interface ITitle {
+  rendered?: string;
+}
+
+interface INews {
+  title?: ITitle;
+  link?: any;
 }
 
 interface IShareContext {
-  link?: ILink;
-  handleSetShare?(value: ILink): any;
-  handleShareNews?(): void;
+  news?: INews;
+  url?: any;
+  handleSetShare(item: INews): void;
+  handleShareNews(): void;
 }
 
-const ShareContext = createContext<IShareContext>(null as unknown as IShareContext);
+interface IComponentProps {
+  children?: React.ReactNode;
+}
 
-export const ShareProvider: React.FC<IShareContext> = ({ children }): JSX.Element => {
+const ShareContext = createContext<IShareContext>({} as unknown as IShareContext);
 
-  const [link, setLink] = useState<ILink>();
+export const ShareProvider: React.FC<IComponentProps> = ({ children }): JSX.Element => {
 
-  const handleSetShare = useCallback((value: ILink) => {
-    // console.log(value);
-    setLink(value);
+  const [news, setNews] = useState<INews>();
+
+  const handleSetShare = useCallback((value: INews) => {
+    // console.log(value.link, value.title.rendered);
+    setNews(value);
   }, []);
 
   const handleShareNews = async () => {
     try {
       const result = await Share.share({
-        message:
-          'React Native | A framework for building native apps using React',
+        title: news?.title?.rendered,
+        message: `${news?.title?.rendered} ${'\n'} ${news?.link}`,
+        url: news?.link,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -40,10 +52,10 @@ export const ShareProvider: React.FC<IShareContext> = ({ children }): JSX.Elemen
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
-    <ShareContext.Provider value={{ link, handleSetShare, handleShareNews }}>
+    <ShareContext.Provider value={{ news, handleSetShare, handleShareNews }}>
       {children}
     </ShareContext.Provider>
   );

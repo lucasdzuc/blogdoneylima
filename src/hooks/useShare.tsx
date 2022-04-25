@@ -2,14 +2,19 @@ import { useContext } from 'react';
 
 import ShareContext from '../contexts/share';
 
+interface ITitle {
+  rendered?: string;
+}
+
 interface ILink {
+  title?: ITitle;
   link?: string;
 }
 
 interface IShareContext {
-  link?: ILink;
-  handleSetShare?(value: ILink): any;
-  handleShareNews?(): void;
+  shareNews?: ILink;
+  handleSetShare(item: ILink): void;
+  handleShareNews(): void;
 }
 
 function useShare(): IShareContext {

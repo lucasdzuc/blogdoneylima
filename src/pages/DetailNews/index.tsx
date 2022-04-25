@@ -88,7 +88,11 @@ const DetailNews: React.FC<Props> = () => {
           excerpt: modifiedExcerpt(item.excerpt?.rendered),
         })));
         
-        // handleSetShare(response?.link);
+        // handleSetShare([response].map((item: News) => ({
+        //   title: item?.title.rendered,
+        //   link: item?.link,
+        // })));
+        handleSetShare(response);
         setLoading(false);
       })
       .catch((error) => {

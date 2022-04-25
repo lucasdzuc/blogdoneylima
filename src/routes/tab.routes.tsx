@@ -29,24 +29,24 @@ const DrawerRoutes = () => {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
-      tabBarOptions={{
-        showLabel: true,
-        drawerActiveTintColor: '#Ec7C27',
-        drawerInactiveTintColor: '#858585',
-        drawerActiveBackgroundColor: '#F4F4F4',
-        // drawerHideStatusBarOnOpen
-        drawerLabelStyle: {
-          // fontFamily: 'gilroymedium',
-          fontSize: 17,
-          textTransform: 'capitalize',
-        },
-        drawerStyle: {
-          backgroundColor: '#FFF',
-          elevation: 0,
-          borderWidth: 0,
-          shadowColor: 'transparent',
-        }
-      }}
+      // tabBarOptions={{
+      //   showLabel: true,
+      //   drawerActiveTintColor: '#Ec7C27',
+      //   drawerInactiveTintColor: '#858585',
+      //   drawerActiveBackgroundColor: '#F4F4F4',
+      //   // drawerHideStatusBarOnOpen
+      //   drawerLabelStyle: {
+      //     // fontFamily: 'gilroymedium',
+      //     fontSize: 17,
+      //     textTransform: 'capitalize',
+      //   },
+      //   drawerStyle: {
+      //     backgroundColor: '#FFF',
+      //     elevation: 0,
+      //     borderWidth: 0,
+      //     shadowColor: 'transparent',
+      //   }
+      // }}
     >
       <Drawer.Screen
         name="Home"
