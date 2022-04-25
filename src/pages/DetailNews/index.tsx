@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Dimensions, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, Image, Dimensions, ActivityIndicator, Share } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 // import axios from 'axios'
 
 const { width } = Dimensions.get('window');
 
 import formatDate from '../../utils/formatDate';
+
+import useShare from '../../hooks/useShare';
 
 import { 
   Container,
@@ -45,6 +47,8 @@ interface Props {
 
 const DetailNews: React.FC<Props> = () => {
 
+  const { handleSetShare } = useShare();
+
   // const navigation = useNavigation();
   const route = useRoute();
   
@@ -83,6 +87,8 @@ const DetailNews: React.FC<Props> = () => {
           image: getImage(item.content?.rendered),
           excerpt: modifiedExcerpt(item.excerpt?.rendered),
         })));
+        
+        // handleSetShare(response?.link);
         setLoading(false);
       })
       .catch((error) => {

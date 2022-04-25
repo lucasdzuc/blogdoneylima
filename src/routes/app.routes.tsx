@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { TouchableOpacity, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Feather } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 
@@ -13,11 +14,15 @@ import Activity from '../pages/Activity';
 import DetailNews from '../pages/DetailNews';
 import Search from '../pages/Search';
 
+import useShare from '../hooks/useShare';
+
 //IMPORT ICON SVG
 // import IconCloseSquare from '../assets/icons/close-square.svg';
 
 // screenOptions={{ headerShown: true }}
 export default function AppRoutes() {
+
+  const { handleShareNews } = useShare();
 
   return (
     <NavigationContainer>
@@ -66,7 +71,16 @@ export default function AppRoutes() {
         <Stack.Screen
           name="DetailNews"
           component={DetailNews}
-          options={{
+          options={() => ({
+            headerRight: () => (
+              <Feather 
+                name="share-2" 
+                size={24} 
+                color="black" 
+                style={{ paddingHorizontal: 24 }}
+                onPress={handleShareNews}
+              />
+            ),
             headerShown: true,
             title: 'Notícia',
             headerTitleAlign: 'center',
@@ -81,7 +95,7 @@ export default function AppRoutes() {
               borderWidth: 0,
               shadowColor: 'transparent',
             },
-          }}
+          })}
         />
 
         <Stack.Screen
