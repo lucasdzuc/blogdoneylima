@@ -53,7 +53,7 @@ const DrawerRoutes = () => {
         component={Home}
         options={{
           drawerLabel: 'Início',
-          drawerIcon: ({ color, size }) => (
+          drawerIcon: ({ color, size }: any) => (
             <Feather name="home" size={size} color={color} />
           ),
           // headerTitle: (props => <LogoTitle {...props} />),
@@ -87,7 +87,7 @@ const DrawerRoutes = () => {
         component={Contact}
         options={{
           drawerLabel: 'Contato',
-          drawerIcon: ({ color, size }) => (
+          drawerIcon: ({ color, size }: any) => (
             <Feather name="mail" size={size} color={color} />
           ),
           headerShown: true,
@@ -106,12 +106,12 @@ const DrawerRoutes = () => {
           },
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Configuration"
         component={Configuration}
         options={{
           drawerLabel: 'Configurações',
-          drawerIcon: ({ color, size }) => (
+          drawerIcon: ({ color, size }: any) => (
             <Feather name="settings" size={size} color={color} />
           ),
           headerShown: true,
@@ -129,7 +129,7 @@ const DrawerRoutes = () => {
             shadowColor: 'transparent',
           },
         }}
-      />
+      /> */}
       {/* <Drawer.Screen
         name="Spot"
         component={Spot}
