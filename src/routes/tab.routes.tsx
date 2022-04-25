@@ -71,15 +71,15 @@ const DrawerRoutes = () => {
             borderWidth: 0,
             shadowColor: 'transparent',
           },
-          headerRight: () => (
-            <Feather 
-              name="bell" 
-              size={24} 
-              color="#000"
-              style={{ paddingHorizontal: 24 }}
-              // onPress={() => {}}
-            />
-          ),
+          // headerRight: () => (
+          //   <Feather 
+          //     name="bell" 
+          //     size={24} 
+          //     color="#000"
+          //     style={{ paddingHorizontal: 24 }}
+          //     // onPress={() => {}}
+          //   />
+          // ),
         }}
       />
       <Drawer.Screen

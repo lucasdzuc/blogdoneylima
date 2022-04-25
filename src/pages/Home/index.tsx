@@ -230,8 +230,8 @@ const Home: React.FC<Types> = () => {
 
             <ContentButtonLeadMore>
               <ButtonLeadMoreNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={0.6}>
-                <Feather name="arrow-right" size={20} color="#Ec7C27" />
                 <TextButtonLeadMoreNews>Ver mais</TextButtonLeadMoreNews>
+                <Feather name="arrow-right" size={20} color="#Ec7C27" />
               </ButtonLeadMoreNews>
             </ContentButtonLeadMore>
 

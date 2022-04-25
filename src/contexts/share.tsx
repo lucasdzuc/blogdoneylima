@@ -12,7 +12,7 @@ interface INews {
 }
 
 interface IShareContext {
-  news?: INews;
+  news?: INews | null;
   url?: any;
   handleSetShare(item: INews): void;
   handleShareNews(): void;
@@ -26,7 +26,7 @@ const ShareContext = createContext<IShareContext>({} as unknown as IShareContext
 
 export const ShareProvider: React.FC<IComponentProps> = ({ children }): JSX.Element => {
 
-  const [news, setNews] = useState<INews>();
+  const [news, setNews] = useState<INews | null>(null);
 
   const handleSetShare = useCallback((value: INews) => {
     // console.log(value.link, value.title.rendered);
@@ -50,6 +50,7 @@ export const ShareProvider: React.FC<IComponentProps> = ({ children }): JSX.Elem
         // dismissed
       }
     } catch (error) {
+      setNews(null),
       console.log(error);
     }
   };
