@@ -7,6 +7,7 @@ Aplicativo de notícias Blog do Ney Lima, conecte-se e fique por dentro das prin
 
 - [x] Listagem de notícias;
 - [x] Detalhes da notícias;
+- [x] Compartilhar notícias;
 - [x] Campo de pesquisa;
 - [ ] Filtrar notícias por data;
 - [ ] Tema Escuro;
@@ -38,6 +39,12 @@ Utilize o **yarn** ou o **npm install** para instalar as dependências do projet
 Em seguida, inicie o projeto.
 
 ```cl
+git clone https://github.com/lucasdzuc/blogdoneylima.git
+
+cd blogdoneylima
+
+yarn ou npm install
+
 expo start
 ``` 
 
