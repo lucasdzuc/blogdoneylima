@@ -18,6 +18,7 @@ Aplicativo de notícias Blog do Ney Lima, conecte-se e fique por dentro das prin
 -   **Typescript**
 -   **Expo**
 -   **Vector Icons**
+-   **Styled Components**
 -   **React Native Svg e Svg Transform**
 -   **React Navigation Stack**
 -   **WordPress API REST**
