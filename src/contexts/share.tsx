@@ -37,7 +37,7 @@ export const ShareProvider: React.FC<IComponentProps> = ({ children }): JSX.Elem
     try {
       const result = await Share.share({
         title: news?.title?.rendered,
-        message: `${news?.title?.rendered} ${'\n'} ${news?.link}`,
+        message: news?.link,
         url: news?.link,
       });
       if (result.action === Share.sharedAction) {
