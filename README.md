@@ -39,7 +39,7 @@ Baixe o aplicativo e teste em seu Smartphone.
 Utilize o **yarn** ou o **npm install** para instalar as dependências do projeto.
 Em seguida, inicie o projeto.
 
-```cl
+```bash
 git clone https://github.com/lucasdzuc/blogdoneylima.git
 
 cd blogdoneylima
