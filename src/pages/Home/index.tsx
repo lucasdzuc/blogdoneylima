@@ -71,7 +71,7 @@ const Home: React.FC<Types> = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const navigateToSearch = useCallback(() => {
-    navigation.navigate('Search');
+    navigation.navigate('Search' as any);
   }, []);
 
   const navigateToDetailNews = useCallback((newsId: any) => {
@@ -184,6 +184,16 @@ const Home: React.FC<Types> = () => {
 
   // console.log(news);
 
+  const dateToday = new Date().toLocaleDateString();
+  
+  function getDatePost(date: any){
+    const datePost = new Date(date).toLocaleDateString();
+    // const refinedDatePost = datePost.toLocaleDateString();
+    // console.log(datePost);
+    
+    return datePost;
+  }
+
   return (
     <Container>
 
@@ -221,6 +231,15 @@ const Home: React.FC<Types> = () => {
                 {/* <ImageNews source={{ uri: img?.value }} resizeMode="cover" /> */}
                 {/* <ImageNews source={{ uri: item?.value }} resizeMode="cover" /> */}
               <ImageNews source={{ uri: getImage(item.content) }} resizeMode="cover" />
+
+              {dateToday === getDatePost(item.date) && 
+                (
+                  <View style={{ position: 'absolute', width: 60, backgroundColor: '#Ec7C27', paddingVertical: 1, borderRadius: 8, top: 8, left: 8, alignItems: 'center' }}>
+                    <Text style={{ fontSize: 13, color: '#ffffff', fontWeight: '400' }}>HOJE</Text>
+                  </View>
+                )
+              }
+
               {/* <ImageNews source={{ uri: item.content?.rendered }} resizeMode="cover" /> */}
             </ButtonDetailsNews>
 

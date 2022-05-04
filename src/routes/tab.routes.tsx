@@ -16,15 +16,15 @@ import Configuration from '../pages/Configuration';
 
 const DrawerRoutes = () => {
 
-  function LogoTitle() {
-    return (
-      <View />
-      // <Image
-        // style={{ width: 50, height: 50 }}
-        // source={require('@expo/snack-static/react-native-logo.png')}
-      // />
-    );
-  }
+  // function LogoTitle() {
+  //   return (
+  //     <View />
+  //     // <Image
+  //       // style={{ width: 50, height: 50 }}
+  //       // source={require('@expo/snack-static/react-native-logo.png')}
+  //     // />
+  //   );
+  // }
 
   return (
     <Drawer.Navigator
