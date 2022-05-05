@@ -26,13 +26,13 @@ Aplicativo de notícias Blog do Ney Lima, conecte-se e fique por dentro das prin
 
 ## 🔖 Layout
 
-Você pode visualizar o layout do projeto através do [link](https://www.figma.com/file/okpY8Qz2ABteJtFGmTkatN/blogdoneylima?node-id=0%3A1).
+Visualize o layout do projeto no Figma no [link](https://drive.google.com/file/d/1cIyFGBYxNdDE1LiWj7H9a2QJs_hu3KL3/view?usp=sharing).
 
 ## 📱 Testar aplicativo
 
 Baixe o aplicativo e teste em seu Smartphone.
 
-- [**ANDROID**](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40lucasdzuc/blogdoneylima-b6e7267c13ef4867afefcd85214fd4f2-signed.apk)
+- [**DOWNLOAD ANDROID**](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40lucasdzuc/blogdoneylima-b6e7267c13ef4867afefcd85214fd4f2-signed.apk)
 
 ## Executando o projeto
 

@@ -234,7 +234,7 @@ const Home: React.FC<Types> = () => {
 
               {dateToday === getDatePost(item.date) && 
                 (
-                  <View style={{ position: 'absolute', width: 60, backgroundColor: '#Ec7C27', paddingVertical: 1, borderRadius: 8, top: 8, left: 8, alignItems: 'center' }}>
+                  <View style={{ position: 'absolute', width: 60, backgroundColor: '#Ec7C27', paddingVertical: 1, borderRadius: 6, top: 8, left: 8, alignItems: 'center' }}>
                     <Text style={{ fontSize: 13, color: '#ffffff', fontWeight: '400' }}>HOJE</Text>
                   </View>
                 )
