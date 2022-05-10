@@ -1,15 +1,10 @@
 import { useContext } from 'react';
+import light from '../styles/themes/light';
 
 import ThemeContext from '../contexts/theme';
 
-interface ITheme {
-  title: string;
-  dark: string;
-  light: string;
-}
-
 interface IThemeContext {
-  theme: ITheme;
+  theme?: typeof light;
   toggleTheme(): void;
 }
 

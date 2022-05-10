@@ -1,43 +1,47 @@
 import 'styled-components';
+import light from './themes/light';
+
+export type Theme = typeof light;
 
 declare module 'styled-components' {
-  export interface DefaultTheme {
+  export interface DefaultTheme extends Theme {}
+  // export interface DefaultTheme {
 
-    title: string;
+  //   title: string;
 
-    colors: {
-      primary: string;
+  //   colors: {
+  //     primary: string;
 
-      secondary: string;
+  //     secondary: string;
 
-      terciary: string;
+  //     terciary: string;
 
-      iconColor: string;
+  //     iconColor: string;
 
-      text: string,
-      subtext: string,
-      buttonprimary: string,
-      buttonsecondary: string,
-      background: string,
+  //     text: string,
+  //     subtext: string,
+  //     buttonprimary: string,
+  //     buttonsecondary: string,
+  //     background: string,
 
-      searchinput: string,
-      searchplaceholder: string,
-      searchicon: string,
-      searchtextvalue: string,
+  //     searchinput: string,
+  //     searchplaceholder: string,
+  //     searchicon: string,
+  //     searchtextvalue: string,
 
-      card: string,
-      cardname: string,
-      carddescription: string,
+  //     card: string,
+  //     cardname: string,
+  //     carddescription: string,
 
-      emptytext: string,
+  //     emptytext: string,
 
-      carddash: string,
+  //     carddash: string,
 
-      cardlog: string,
+  //     cardlog: string,
 
-      buttonCancelModal: string,
-      textButtonCancelModal: string,
-    };
+  //     buttonCancelModal: string,
+  //     textButtonCancelModal: string,
+  //   };
 
-  }
+  // }
 }

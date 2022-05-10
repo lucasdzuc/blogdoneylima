@@ -52,6 +52,7 @@ export const CardNews = styled.View`
   padding: 16px;
   border-radius: 14px;
   background: #F4F4F4;
+  /* props.theme.colors.background */
 `;
 
 export const ButtonDetailsNews = styled.TouchableOpacity``;

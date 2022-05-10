@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 // import AppLoading from 'expo-app-loading';
 import { Host } from 'react-native-portalize';
 
-import ThemeProvider from './contexts/theme';
+// import ThemeProvider from './contexts/theme';
 import { ShareProvider } from './contexts/share';
 
 import Routes from './routes';
@@ -21,18 +21,16 @@ const AppMobile: React.FC = () => {
   // };
 
   return (
-    <ThemeProvider>
     <NavigationContainer>
       <Host>
-          <View style={{ flex: 1, backgroundColor: "#FFF" }}>
-            <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
-              <ShareProvider>
-                <Routes />
-              </ShareProvider>
-          </View>
+        <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+          <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
+            <ShareProvider>
+              <Routes />
+            </ShareProvider>
+        </View>
       </Host>
     </NavigationContainer>
-    </ThemeProvider>
   );
 }
 
