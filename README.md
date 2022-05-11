@@ -32,7 +32,7 @@ Visualize o layout do projeto no Figma no [link](https://www.figma.com/file/okpY
 
 Baixe o aplicativo e teste em seu Smartphone.
 
-- [**DOWNLOAD ANDROID**](https://drive.google.com/file/d/1cIyFGBYxNdDE1LiWj7H9a2QJs_hu3KL3/view?usp=sharing)
+- [**DOWNLOAD ANDROID**](https://drive.google.com/drive/folders/1_ztaBBdxfyTOPnqoG4RxJFOvC3PBFycV?usp=sharing)
 
 ## Executando o projeto
 
