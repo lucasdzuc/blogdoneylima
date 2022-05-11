@@ -140,27 +140,9 @@ const Home: React.FC<Types> = () => {
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-
     setLoading(true);
-      const response = await api.get(`/wp/v2/posts`, {
-        params: {
-          page,
-          _per_page: 10,
-        }
-      });
-      setTotal(response.headers['x-wp-total']);
-      setPage(page + 1);
-      setNews([
-        ...news,
-        ...response.data.map((item: News) => ({
-          id: item?.id,
-          title: item.title?.rendered,
-          content: item.content?.rendered,
-          date: item.date,
-        })).filter((res: any) => res.title !== "<NO>" && res.title !== "<no>"),
-      ]);
-      setLoading(false);
-
+    loadNews();
+    setLoading(false);
     wait(1000).then(() => setRefreshing(false));
   }, [refreshing, news]);
 
