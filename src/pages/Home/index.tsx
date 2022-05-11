@@ -144,7 +144,7 @@ const Home: React.FC<Types> = () => {
     loadNews();
     setLoading(false);
     wait(1000).then(() => setRefreshing(false));
-  }, [refreshing, news]);
+  }, [refreshing]);
 
   function FooterList({ load }: any){
     if (!load) return null;
