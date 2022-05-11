@@ -82,7 +82,7 @@ const Home: React.FC<Types> = () => {
     
     // const content = value.slice(0, 780);
     
-    const match = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/i);
+    const match = value?.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/i);
 
     const interetor = match[Symbol.iterator]();
 
@@ -144,7 +144,7 @@ const Home: React.FC<Types> = () => {
     loadNews();
     setLoading(false);
     wait(1000).then(() => setRefreshing(false));
-  }, [refreshing, news]);
+  }, [refreshing]);
 
   function FooterList({ load }: any){
     if (!load) return null;
