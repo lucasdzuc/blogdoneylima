@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, Dimensions, ActivityIndicator, Share } from 'react-native';
+import { View, Text, Image, Dimensions, ActivityIndicator, Share, WebView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 // import axios from 'axios'
 
@@ -39,6 +39,7 @@ interface News {
   content?: Content;
   excerpt?: Excerpt;
   date?: any;
+  midia?: any;
 }
 
 interface Props {
@@ -60,7 +61,7 @@ const DetailNews: React.FC<Props> = () => {
   const [loading, setLoading] = useState(false);
 
   function getImage(value: any){
-    const [match] = value.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/s);
+    const [match] = value?.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/s);
     // console.log(match);
     return match;
   };
@@ -68,10 +69,15 @@ const DetailNews: React.FC<Props> = () => {
   // excerpt?.rendered
   function modifiedExcerpt(value: any){
     // const modfied = value.replace(/[\<\/p\><\/p>]/g,"");
-    const modfied = value.replace(/<\/?[^]>/g,"");
+    const modfied = value?.replace(/<\/?[^]>/g,"");
     // const modfied = value;
     return modfied;
   };
+
+  function getMidia(value: any){
+    const valueMidia = value?.match(/<iframe\s?[^"].*<\/iframe>/i);
+    return valueMidia;
+  }
   
   useEffect(() => {
     async function loadPost(){
@@ -86,6 +92,7 @@ const DetailNews: React.FC<Props> = () => {
           ...item,
           image: getImage(item.content?.rendered),
           excerpt: modifiedExcerpt(item.excerpt?.rendered),
+          midia: getMidia(item.excerpt?.rendered)
         })));
         
         // handleSetShare([response].map((item: News) => ({
@@ -145,6 +152,13 @@ const DetailNews: React.FC<Props> = () => {
           {/* <TextContentNews>{item.content?.rendered}</TextContentNews> */}
 
           <TextContentNews>{item?.excerpt}</TextContentNews>
+
+          {item?.midia && (
+            <WebView
+              source={{ html: `${item.midia}` }}
+              style={{ marginTop: 16 }}
+            />
+          )}
         </CardNews>
         ))
       )}
