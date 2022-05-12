@@ -1,3 +1,4 @@
+// import 'react-native-reanimated'
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, RefreshControl, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

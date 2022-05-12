@@ -1,6 +1,8 @@
+// import 'react-native-reanimated';
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, Dimensions, ActivityIndicator, Share, WebView } from 'react-native';
+import { View, Text, Image, Dimensions, ActivityIndicator, Share } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+// import { WebView } from 'react-native-webview';
 // import axios from 'axios'
 
 const { width } = Dimensions.get('window');
@@ -92,7 +94,7 @@ const DetailNews: React.FC<Props> = () => {
           ...item,
           image: getImage(item.content?.rendered),
           excerpt: modifiedExcerpt(item.excerpt?.rendered),
-          midia: getMidia(item.excerpt?.rendered)
+          // midia: getMidia(item.excerpt?.rendered)
         })));
         
         // handleSetShare([response].map((item: News) => ({
@@ -152,13 +154,14 @@ const DetailNews: React.FC<Props> = () => {
           {/* <TextContentNews>{item.content?.rendered}</TextContentNews> */}
 
           <TextContentNews>{item?.excerpt}</TextContentNews>
+          
 
-          {item?.midia && (
-            <WebView
-              source={{ html: `${item.midia}` }}
-              style={{ marginTop: 16 }}
-            />
-          )}
+          {/* <WebView
+            style={{ marginTop: 16 }}
+            originWhitelist={['*']}
+            source={{ html: `${item?.midia}` }}
+          /> */}
+          
         </CardNews>
         ))
       )}
