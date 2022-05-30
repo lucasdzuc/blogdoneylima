@@ -67,7 +67,7 @@ const Home: React.FC<Types> = () => {
 
   const [news, setNews] = useState<News[]>([]);
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState<any>(0);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -80,19 +80,25 @@ const Home: React.FC<Types> = () => {
   }, []);
 
   function getImage(value: any) {
-    
     // const content = value.slice(0, 780);
-    
-    const match = value?.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/i);
 
+    const DefaultImage = 'https://www.blogdoneylima.com.br/wp-content/themes/neylima2.2/img/logo.png';
+    
+    const match = value?.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/s);
     const interetor = match[Symbol.iterator]();
-
-    const formatImage = interetor.next().value;
+    const imageMatch = interetor?.next().value;
     
-    // console.log(formatImage);
-
-    return formatImage;
+    return imageMatch != null ? imageMatch : DefaultImage;
   };
+
+  const dateToday = new Date().toLocaleDateString();
+  
+  function getDatePost(date: any){
+    const datePost = new Date(date).toLocaleDateString();
+    // const refinedDatePost = datePost.toLocaleDateString();
+    // console.log(datePost);
+    return datePost;
+  }
 
   async function loadNews() {
     try {
@@ -161,21 +167,9 @@ const Home: React.FC<Types> = () => {
   };
 
   const closeModal = () => {
-    // setIdPost();
     modalizeRef.current?.close();
+    // setIdPost();
   };
-
-  // console.log(news);
-
-  const dateToday = new Date().toLocaleDateString();
-  
-  function getDatePost(date: any){
-    const datePost = new Date(date).toLocaleDateString();
-    // const refinedDatePost = datePost.toLocaleDateString();
-    // console.log(datePost);
-    
-    return datePost;
-  }
 
   return (
     <Container>

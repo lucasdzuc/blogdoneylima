@@ -76,10 +76,16 @@ const DetailNews: React.FC<Props> = () => {
     return modfied;
   };
 
-  function getMidia(value: any){
-    const valueMidia = value?.match(/<iframe\s?[^"].*<\/iframe>/i);
-    return valueMidia;
-  }
+  // function getMidia(value: any){
+  //   const [valueMidia] = value?.match(/<iframe\s?[^"].*<\/iframe>/i);
+    
+  //   const [gettingSource] = valueMidia?.match(/https?:\/\/[^"]*/i);
+
+  //   // console.log(valueMidia);
+  //   // console.log(gettingSource);
+
+  //   return gettingSource;
+  // }
   
   useEffect(() => {
     async function loadPost(){
@@ -94,7 +100,7 @@ const DetailNews: React.FC<Props> = () => {
           ...item,
           image: getImage(item.content?.rendered),
           excerpt: modifiedExcerpt(item.excerpt?.rendered),
-          // midia: getMidia(item.excerpt?.rendered)
+          // midia: getMidia(item.content?.rendered)
         })));
         
         // handleSetShare([response].map((item: News) => ({
@@ -105,7 +111,8 @@ const DetailNews: React.FC<Props> = () => {
         setLoading(false);
       })
       .catch((error) => {
-        // console.log(error);
+        console.log(error);
+        setNews([]);
         setLoading(false);
       })
       // const response: News = await axios.get(`https://blogdoneylima.com.br/wp-json/wp/v2/posts/${newsId}`);
@@ -154,13 +161,18 @@ const DetailNews: React.FC<Props> = () => {
           {/* <TextContentNews>{item.content?.rendered}</TextContentNews> */}
 
           <TextContentNews>{item?.excerpt}</TextContentNews>
-          
 
-          {/* <WebView
-            style={{ marginTop: 16 }}
-            originWhitelist={['*']}
-            source={{ html: `${item?.midia}` }}
-          /> */}
+          {/* <Text>{item?.midia}</Text> */}
+
+          {/* `${item?.midia}` */}
+          
+          {/* {item?.midia && (
+            <WebView
+              style={{ paddingTop: 24, height: 152, backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+              originWhitelist={['*']}
+              source={{ uri: `${item?.midia}` }}
+            />
+          )} */}
           
         </CardNews>
         ))
