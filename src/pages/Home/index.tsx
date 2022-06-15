@@ -79,17 +79,17 @@ const Home: React.FC<Types> = () => {
     navigation.navigate('DetailNews', { newsId });
   }, []);
 
-  function getImage(value: any) {
+  const getImage = useCallback((value: any) => {
     // const content = value.slice(0, 780);
 
     const DefaultImage = 'https://www.blogdoneylima.com.br/wp-content/themes/neylima2.2/img/logo.png';
     
     const match = value?.match(/https?:\/\/[^"]+\.(jpg|jpeg|png)/s);
-    const interetor = match[Symbol.iterator]();
-    const imageMatch = interetor?.next().value;
+    const interetor = match[Symbol?.iterator]();
+    const imageMatch = interetor?.next()?.value;
     
     return imageMatch != null ? imageMatch : DefaultImage;
-  };
+  }, []);
 
   const dateToday = new Date().toLocaleDateString();
   
@@ -205,8 +205,8 @@ const Home: React.FC<Types> = () => {
             
             <ButtonDetailsNews onPress={() => navigateToDetailNews(item.id)} activeOpacity={1}>
               {/* {item.image.map((img: any) => console.log(img))} */}
-                {/* <ImageNews source={{ uri: img?.value }} resizeMode="cover" /> */}
-                {/* <ImageNews source={{ uri: item?.value }} resizeMode="cover" /> */}
+              {/* <ImageNews source={{ uri: img?.value }} resizeMode="cover" /> */}
+              {/* <ImageNews source={{ uri: item?.image }} resizeMode="cover" /> */}
               <ImageNews source={{ uri: getImage(item.content) }} resizeMode="cover" />
 
               {dateToday === getDatePost(item.date) && 
